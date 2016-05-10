@@ -58,6 +58,11 @@ public class AsteroidSpawner : MonoBehaviour {
         }
     }
 
+    public void SpawnSmaller(Vector3 position)
+    {
+        var smallerAsteroid = (GameObject)Instantiate(AsteroidPrefab, position, Quaternion.identity); // why (clone)(clone)??
+    }
+
     void PropelForward(GameObject asteroid)
     {
         var direction = PlayerSpawner.GetCentralPlayer().transform.position - asteroid.transform.position;
