@@ -18,7 +18,13 @@ public class PlayerSpawner : MonoBehaviour {
 
 	void Start () {
 
-        _centralPlayer = (GameObject) Instantiate(PlayerPrefab, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
+        Spawn();
+
+    }
+
+    public void Spawn()
+    {
+        _centralPlayer = (GameObject)Instantiate(PlayerPrefab, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
         _clones = new List<GameObject>();
         CreateClones();
     }

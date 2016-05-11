@@ -9,5 +9,6 @@ public class TagsReference : MonoBehaviour {
     public const string MISSILE = "Missile";
     public const string PLAYER = "Player";
     public const string ASTEROID = "Asteroid";
+    public const string LOGIC = "Logic";
 
 }

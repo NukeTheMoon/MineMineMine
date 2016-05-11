@@ -9,8 +9,8 @@ public class AsteroidDivider : MonoBehaviour {
     public int Divisor = 2;
     [Range(0, 6)]
     public int Divisions = 6;
-    public float PositionJitter;
-    public float SpeedJitterFactor;
+    public float PositionJitter = 1;
+    public float Force = 100;
 
     public static Dictionary<int, int> DivisionReference = new Dictionary<int, int>();
 
@@ -67,7 +67,7 @@ public class AsteroidDivider : MonoBehaviour {
     {
         var direction = smallerAsteroid.transform.position - transform.position;
         var rigidbody = smallerAsteroid.GetComponent<Rigidbody>();
-        rigidbody.AddForce(direction * SpeedJitterFactor);
+        rigidbody.AddForce(direction * Force);
         rigidbody.drag = 0;
     }
 
