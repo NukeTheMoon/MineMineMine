@@ -6,9 +6,9 @@ using System;
 public class AsteroidDivider : MonoBehaviour {
 
     public GameObject AsteroidPrefab;
-    public int Divisor = 2;
+    public static int Divisor = 2;
     [Range(0, 6)]
-    public int Divisions = 6;
+    public static int Divisions = 6;
     public float PositionJitter = 1;
     public float Force = 100;
 
@@ -42,6 +42,7 @@ public class AsteroidDivider : MonoBehaviour {
             }
             Destroy(gameObject);
             Destroy(other.gameObject);
+            ScoreKeeper.AsteroidHit();
         }
     }
 

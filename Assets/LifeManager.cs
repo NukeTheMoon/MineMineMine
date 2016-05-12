@@ -8,12 +8,14 @@ public class LifeManager : MonoBehaviour {
     public int StartingLives;
     public Text DebugTextField;
     public PlayerSpawner PlayerSpawner;
-    public GameManager GameManager;
+
+    public static bool PlayerAlive { get; set; }
 
     private int _livesLeft;
 
     void Start()
     {
+        PlayerAlive = true;
         _livesLeft = StartingLives;
         UpdateDebugTextField();
     }
@@ -32,7 +34,7 @@ public class LifeManager : MonoBehaviour {
     {
         if (NoLivesLeft())
         {
-            GameManager.PlayerAlive = false;
+            PlayerAlive = false;
         }
         else
         {

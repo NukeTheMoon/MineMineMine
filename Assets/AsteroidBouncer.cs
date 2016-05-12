@@ -5,11 +5,10 @@ public class AsteroidBouncer : MonoBehaviour {
 
     public PlayerSpawner PlayerSpawner;
     public AsteroidSpawner AsteroidSpawner;
-    public GameManager GameManager;
 
     void OnTriggerExit(Collider other)
     {
-        if (GameManager.PlayerAlive)
+        if (LifeManager.PlayerAlive)
         {
             if (other.gameObject.tag == TagsReference.ASTEROID)
             {

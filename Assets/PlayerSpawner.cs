@@ -9,6 +9,12 @@ public class PlayerSpawner : MonoBehaviour {
     public float HorizontalOffset; // default to 18.0
     public float VerticalOffset; // default to 10.5
 
+    public const string CENTRAL_PLAYER = "CentralPlayer";
+    public const string NORTH_PLAYER_LOOP_CLONE = "NorthPlayerLoopClone";
+    public const string EAST_PLAYER_LOOP_CLONE = "EastPlayerLoopClone";
+    public const string SOUTH_PLAYER_LOOP_CLONE = "SouthPlayerLoopClone";
+    public const string WEST_PLAYER_LOOP_CLONE = "WestPlayerLoopClone";
+
     private GameObject _centralPlayer;
     private GameObject _northClone;
     private GameObject _eastClone;
@@ -25,6 +31,7 @@ public class PlayerSpawner : MonoBehaviour {
     public void Spawn()
     {
         _centralPlayer = (GameObject)Instantiate(PlayerPrefab, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
+        _centralPlayer.name = CENTRAL_PLAYER;
         _clones = new List<GameObject>();
         CreateClones();
     }
@@ -42,6 +49,11 @@ public class PlayerSpawner : MonoBehaviour {
         _clones.Add(_eastClone = (GameObject)Instantiate(PlayerPrefab, eastClonePosition, _centralPlayer.transform.rotation));
         _clones.Add(_southClone = (GameObject)Instantiate(PlayerPrefab, southClonePosition, _centralPlayer.transform.rotation));
         _clones.Add(_westClone = (GameObject)Instantiate(PlayerPrefab, westClonePosition, _centralPlayer.transform.rotation));
+
+        _northClone.name = NORTH_PLAYER_LOOP_CLONE;
+        _eastClone.name = EAST_PLAYER_LOOP_CLONE;
+        _southClone.name = SOUTH_PLAYER_LOOP_CLONE;
+        _westClone.name = WEST_PLAYER_LOOP_CLONE;
 
         MatchCloneVelocityToCentralPlayer();
 
@@ -63,6 +75,7 @@ public class PlayerSpawner : MonoBehaviour {
         DestroyClonesOtherThan(newCentralPlayer);
         Destroy(_centralPlayer);
         _centralPlayer = newCentralPlayer;
+        _centralPlayer.name = CENTRAL_PLAYER;
         CreateClones();
     }
 

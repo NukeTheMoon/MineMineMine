@@ -15,7 +15,7 @@ public class AsteroidSpawner : MonoBehaviour {
     public float IntervalSeconds;
     public int MaxAsteroidCount;
 
-    private int _asteroidsSpawnedCount;
+    private int _asteroidsSpawnedCount; 
 
     public void Start()
     {

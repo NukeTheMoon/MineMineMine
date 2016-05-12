@@ -7,7 +7,7 @@ public class PlayerDestroyer : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == TagsReference.PLAYER)
+        if (other.gameObject.name == PlayerSpawner.CENTRAL_PLAYER)
         {
             _lifeManager = GameObject.FindGameObjectWithTag(TagsReference.LOGIC).GetComponent<LifeManager>();
             foreach (var player in GameObject.FindGameObjectsWithTag(TagsReference.PLAYER))
