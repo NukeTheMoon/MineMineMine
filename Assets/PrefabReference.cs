@@ -7,23 +7,31 @@ public class PrefabReference : MonoBehaviour {
     [SerializeField]
     private GameObject _player;
     [SerializeField]
-    public GameObject _missile;
+    private GameObject _pulseMissile;
     [SerializeField]
-    public GameObject _asteroid;
+    private GameObject _scattershotMissile;
     [SerializeField]
-    public GameObject _yield;
+    private GameObject _asteroid;
+    [SerializeField]
+    private GameObject _yield;
+    [SerializeField]
+    private GameObject _powerup;
 
     public static GameObject Player;
-    public static GameObject Missile;
+    public static GameObject PulseMissile;
+    public static GameObject ScattershotMissile;
     public static GameObject Asteroid;
     public static GameObject Yield;
+    public static GameObject Powerup;
 
     void Awake()
     {
         Player = _player;
-        Missile = _missile;
+        PulseMissile = _pulseMissile;
+        ScattershotMissile = _scattershotMissile;
         Asteroid = _asteroid;
         Yield = _yield;
+        Powerup = _powerup;
     }
 
 }

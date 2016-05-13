@@ -12,6 +12,7 @@ public class PlayerDestroyer : MonoBehaviour {
                 Destroy(player);
             }
             SceneReference.LifeManager.LoseLife();
+            SceneReference.WeaponManager.ResetWeapon();
         }
     }
 

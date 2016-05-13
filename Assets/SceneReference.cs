@@ -10,5 +10,7 @@ public class SceneReference : MonoBehaviour {
     public static ScoreKeeper ScoreKeeper { get; set; }
     public static ShotManager ShotManager { get; set; }
     public static AsteroidDivisionManager AsteroidDivisionManager { get; set; }
+    public static PowerupManager PowerupManager { get; set; }
+    public static WeaponManager WeaponManager { get; set; }
 
 }

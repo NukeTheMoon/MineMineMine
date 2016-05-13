@@ -12,17 +12,11 @@ public class AsteroidDivider : MonoBehaviour {
     private int _maxDivisions = 6;
     private Rigidbody _rigidbody;
 
-	// Use this for initialization
 	void Start () {
         _id = gameObject.GetInstanceID();
         _rigidbody = GetComponent<Rigidbody>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void OnTriggerEnter(Collider other)
     {
@@ -33,8 +27,16 @@ public class AsteroidDivider : MonoBehaviour {
                 Divide();
             }
             Destroy(gameObject);
-            Destroy(other.gameObject);
+            Punchthrough(other.gameObject);
             Instantiate(PrefabReference.Yield, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void Punchthrough(GameObject missile)
+    {
+        if (!SceneReference.WeaponManager.IsPunchthrough())
+        {
+            Destroy(missile);
         }
     }
 
