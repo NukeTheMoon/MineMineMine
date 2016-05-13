@@ -40,7 +40,7 @@ public class ShotManager : MonoBehaviour {
             }
             List<int> idsOfMissilesToDestroy;
             PairedShots.TryGetValueList(shotGuid, out idsOfMissilesToDestroy);
-
+            if (idsOfMissilesToDestroy == null) return;
             for (var i = 0; i < idsOfMissilesToDestroy.Count; ++i)
             {
                 var id = idsOfMissilesToDestroy[i];

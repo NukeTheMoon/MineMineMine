@@ -16,17 +16,11 @@ public class MissileSpawner : MonoBehaviour
 
     }
 
-    void Start ()
-    {
-
-    }
-
     private void RegisterWithSceneReference()
     {
         SceneReference.MissileSpawner = this;
     }
 
-    // Update is called once per frame
     void Update () {
 	    if (Input.GetKeyDown(KeyCode.Space) && !SceneReference.WeaponManager.Cooldown)
 	    {
@@ -42,6 +36,9 @@ public class MissileSpawner : MonoBehaviour
                     case (Weapon.Scattershot):
                         SpawnScattershotMissile(shotId, missileSpawnPoint);
                         break;
+                    case (Weapon.Railgun):
+                        SpawnRailgunMissile(shotId, missileSpawnPoint);
+                        break;
                     default:
                         SpawnPulseMissile(shotId, missileSpawnPoint);
                         break;
@@ -50,6 +47,13 @@ public class MissileSpawner : MonoBehaviour
             SceneReference.WeaponManager.InitiateCooldown();
 	    }
 	}
+
+    private void SpawnRailgunMissile(Guid shotId, Transform missileSpawnPoint)
+    {
+        var missile = (GameObject)Instantiate(PrefabReference.RailgunMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
+        SceneReference.ShotManager.RegisterShot(shotId, missile);
+        missile.transform.parent = World;
+    }
 
     private void SpawnScattershotMissile(Guid shotId, Transform missileSpawnPoint)
     {

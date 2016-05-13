@@ -19,6 +19,10 @@ public class WeaponManager : MonoBehaviour {
     public float ScattershotDrag = 1;
     public bool ScattershotPunchthrough = true;
 
+    public int RailgunLifeMs = 20;
+    public int RailgunCooldownMs;
+    public bool RailgunPunchthrough = true;
+
 
     public bool Cooldown { get; protected set; }
 
@@ -47,6 +51,12 @@ public class WeaponManager : MonoBehaviour {
                 break;
             case (Weapon.Scattershot):
                 StartCoroutine(CooldownCoroutine(ScattershotCooldownMs));
+                break;
+            case (Weapon.Railgun):
+                StartCoroutine(CooldownCoroutine(RailgunCooldownMs));
+                break;
+            default:
+                Cooldown = false;
                 break;
         }
     }
