@@ -6,18 +6,28 @@ using Lexicons;
 
 public class ShotManager : MonoBehaviour {
 
-    public static Lexicon<Guid, int> PairedShots = new Lexicon<Guid, int>();
-    public static Dictionary<int, GameObject> MissileIdReference = new Dictionary<int, GameObject>();
-    public static List<int> ProtectedMissileIds = new List<int>();
+    public Lexicon<Guid, int> PairedShots = new Lexicon<Guid, int>();
+    public Dictionary<int, GameObject> MissileIdReference = new Dictionary<int, GameObject>();
+    public List<int> ProtectedMissileIds = new List<int>();
 
-    public static void RegisterShot(Guid shotGuid, GameObject missile)
+    public void Awake()
+    {
+        RegisterWithSceneReference();
+    }
+
+    private void RegisterWithSceneReference()
+    {
+        SceneReference.ShotManager = this;
+    }
+
+    public void RegisterShot(Guid shotGuid, GameObject missile)
     {
         var missileId = missile.GetInstanceID();
         PairedShots.Add(shotGuid, missileId);
         MissileIdReference[missileId] = missile;
     }
 
-    public static void DestroyMissilesFromSameShot(GameObject destroyedMissile)
+    public void DestroyMissilesFromSameShot(GameObject destroyedMissile)
     {
         var destroyedMissileId = destroyedMissile.GetInstanceID();
         if (!ProtectedMissileIds.Contains(destroyedMissileId))

@@ -7,17 +7,27 @@ public class LifeManager : MonoBehaviour {
 
     public int StartingLives;
     public Text DebugTextField;
-    public PlayerSpawner PlayerSpawner;
 
-    public static bool PlayerAlive { get; set; }
+    public bool PlayerAlive { get; set; }
 
     private int _livesLeft;
+
+    void Awake()
+    {
+        RegisterWithSceneReference();
+
+    }
 
     void Start()
     {
         PlayerAlive = true;
         _livesLeft = StartingLives;
         UpdateDebugTextField();
+    }
+
+    private void RegisterWithSceneReference()
+    {
+        SceneReference.LifeManager = this;
     }
 
     private void UpdateDebugTextField()
@@ -38,7 +48,7 @@ public class LifeManager : MonoBehaviour {
         }
         else
         {
-            PlayerSpawner.Spawn();
+            SceneReference.PlayerSpawner.Spawn();
             --_livesLeft;
             UpdateDebugTextField();
         }

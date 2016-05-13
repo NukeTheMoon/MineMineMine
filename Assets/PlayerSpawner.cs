@@ -5,15 +5,16 @@ using System;
 public class PlayerSpawner : MonoBehaviour {
 
     public Transform PlayerSpawnPoint;
-    public GameObject PlayerPrefab;
-    public float HorizontalOffset; // default to 18.0
-    public float VerticalOffset; // default to 10.5
+    public float HorizontalOffset; // temporary default to 18.0
+    public float VerticalOffset; // temporary default to 10.5
 
     public const string CENTRAL_PLAYER = "CentralPlayer";
     public const string NORTH_PLAYER_LOOP_CLONE = "NorthPlayerLoopClone";
     public const string EAST_PLAYER_LOOP_CLONE = "EastPlayerLoopClone";
     public const string SOUTH_PLAYER_LOOP_CLONE = "SouthPlayerLoopClone";
     public const string WEST_PLAYER_LOOP_CLONE = "WestPlayerLoopClone";
+
+    public event EventHandler OnCentralPlayerChanged = delegate { };
 
     private GameObject _centralPlayer;
     private GameObject _northClone;
@@ -22,16 +23,36 @@ public class PlayerSpawner : MonoBehaviour {
     private GameObject _westClone;
     private List<GameObject> _clones;
 
+    void Awake()
+    {
+        RegisterWithSceneReference();
+
+    }
+
 	void Start () {
 
         Spawn();
 
     }
 
+    private void RegisterWithSceneReference()
+    {
+        SceneReference.PlayerSpawner = this;
+    }
+
+    private void ChangeCentralPlayer(GameObject newCentralPlayer)
+    {
+        _centralPlayer = newCentralPlayer;
+        _centralPlayer.name = CENTRAL_PLAYER;
+        if (OnCentralPlayerChanged != null)
+        {
+            OnCentralPlayerChanged(this, null);
+        }
+    }
+
     public void Spawn()
     {
-        _centralPlayer = (GameObject)Instantiate(PlayerPrefab, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
-        _centralPlayer.name = CENTRAL_PLAYER;
+        ChangeCentralPlayer((GameObject)Instantiate(PrefabReference.Player, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation));
         _clones = new List<GameObject>();
         CreateClones();
     }
@@ -45,10 +66,10 @@ public class PlayerSpawner : MonoBehaviour {
         var westClonePosition = new Vector3(_centralPlayer.transform.position.x - HorizontalOffset, _centralPlayer.transform.position.y, _centralPlayer.transform.position.z);
 
 
-        _clones.Add(_northClone = (GameObject)Instantiate(PlayerPrefab, northClonePosition, _centralPlayer.transform.rotation));
-        _clones.Add(_eastClone = (GameObject)Instantiate(PlayerPrefab, eastClonePosition, _centralPlayer.transform.rotation));
-        _clones.Add(_southClone = (GameObject)Instantiate(PlayerPrefab, southClonePosition, _centralPlayer.transform.rotation));
-        _clones.Add(_westClone = (GameObject)Instantiate(PlayerPrefab, westClonePosition, _centralPlayer.transform.rotation));
+        _clones.Add(_northClone = (GameObject)Instantiate(PrefabReference.Player, northClonePosition, _centralPlayer.transform.rotation));
+        _clones.Add(_eastClone = (GameObject)Instantiate(PrefabReference.Player, eastClonePosition, _centralPlayer.transform.rotation));
+        _clones.Add(_southClone = (GameObject)Instantiate(PrefabReference.Player, southClonePosition, _centralPlayer.transform.rotation));
+        _clones.Add(_westClone = (GameObject)Instantiate(PrefabReference.Player, westClonePosition, _centralPlayer.transform.rotation));
 
         _northClone.name = NORTH_PLAYER_LOOP_CLONE;
         _eastClone.name = EAST_PLAYER_LOOP_CLONE;
@@ -74,8 +95,7 @@ public class PlayerSpawner : MonoBehaviour {
         var newCentralPlayer = GetOpposingClone(exitId);
         DestroyClonesOtherThan(newCentralPlayer);
         Destroy(_centralPlayer);
-        _centralPlayer = newCentralPlayer;
-        _centralPlayer.name = CENTRAL_PLAYER;
+        ChangeCentralPlayer(newCentralPlayer);
         CreateClones();
     }
 
@@ -124,7 +144,6 @@ public class PlayerSpawner : MonoBehaviour {
         return _centralPlayer;
     }
 
-    void Update () {
-	
-	}
+    
+
 }

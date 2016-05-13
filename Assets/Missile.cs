@@ -16,6 +16,6 @@ public class Missile : MonoBehaviour
 
     void OnDestroy()
     {
-        ShotManager.DestroyMissilesFromSameShot(gameObject);
+        SceneReference.ShotManager.DestroyMissilesFromSameShot(gameObject);
     }
 }

@@ -5,14 +5,6 @@ using System;
 
 public class AsteroidDivider : MonoBehaviour {
 
-    public GameObject AsteroidPrefab;
-    public static int Divisor = 2;
-    [Range(0, 6)]
-    public static int Divisions = 6;
-    public float PositionJitter = 1;
-    public float Force = 100;
-
-    public static Dictionary<int, int> DivisionReference = new Dictionary<int, int>();
 
     private int _id;
     private int _firstDivision = 1;
@@ -42,21 +34,21 @@ public class AsteroidDivider : MonoBehaviour {
             }
             Destroy(gameObject);
             Destroy(other.gameObject);
-            ScoreKeeper.AsteroidHit();
+            Instantiate(PrefabReference.Yield, transform.position, Quaternion.identity);
         }
     }
 
     private void Divide()
     {
-        for (var i = 0; i < Divisor; ++i)
+        for (var i = 0; i < SceneReference.AsteroidDivisionManager.Divisor; ++i)
         {
             var divisionNumber = _firstDivision;
-            if (DivisionReference.ContainsKey(_id))
+            if (SceneReference.AsteroidDivisionManager.DivisionReference.ContainsKey(_id))
             {
-                divisionNumber = Math.Min(_maxDivisions, DivisionReference[_id] + 1);
+                divisionNumber = Math.Min(_maxDivisions, SceneReference.AsteroidDivisionManager.DivisionReference[_id] + 1);
             }
-            var smallerAsteroid = (GameObject)Instantiate(AsteroidPrefab, JitterPosition(transform.position, divisionNumber), Quaternion.identity); // why (clone)(clone)??
-            DivisionReference.Add(smallerAsteroid.GetInstanceID(), divisionNumber);
+            var smallerAsteroid = (GameObject)Instantiate(PrefabReference.Asteroid, JitterPosition(transform.position, divisionNumber), Quaternion.identity); // why (clone)(clone)??
+            SceneReference.AsteroidDivisionManager.DivisionReference.Add(smallerAsteroid.GetInstanceID(), divisionNumber);
             smallerAsteroid.name = "Asteroid:" + divisionNumber;
             ApplySize(smallerAsteroid, divisionNumber);
             PropelAwayFromOriginal(smallerAsteroid);
@@ -68,21 +60,23 @@ public class AsteroidDivider : MonoBehaviour {
     {
         var direction = smallerAsteroid.transform.position - transform.position;
         var rigidbody = smallerAsteroid.GetComponent<Rigidbody>();
-        rigidbody.AddForce(direction * Force);
+        rigidbody.AddForce(direction * SceneReference.AsteroidDivisionManager.Force);
         rigidbody.drag = 0;
     }
 
     private Vector3 JitterPosition(Vector3 position, int divisionNumber)
     {
         var scaleModifier = GetScale(divisionNumber);
-        var x = position.x + (UnityEngine.Random.Range(-PositionJitter, PositionJitter) * scaleModifier);
-        var z = position.z + (UnityEngine.Random.Range(-PositionJitter, PositionJitter) * scaleModifier);
+        var x = position.x + (UnityEngine.Random.Range(-SceneReference.AsteroidDivisionManager.PositionJitter, SceneReference.AsteroidDivisionManager.PositionJitter) * scaleModifier);
+        var z = position.z + (UnityEngine.Random.Range(-SceneReference.AsteroidDivisionManager.PositionJitter, SceneReference.AsteroidDivisionManager.PositionJitter) * scaleModifier);
         return new Vector3(x, position.y, z);
     }
 
     private bool CanDivideAsteroid()
     {
-        return (!(DivisionReference.ContainsKey(_id) && DivisionReference[_id] >= Divisions) && Divisions > 0);
+        return (!(SceneReference.AsteroidDivisionManager.DivisionReference.ContainsKey(_id) &&
+            SceneReference.AsteroidDivisionManager.DivisionReference[_id] >= SceneReference.AsteroidDivisionManager.Divisions) && 
+            SceneReference.AsteroidDivisionManager.Divisions > 0);
     }
 
     private void ApplySize(GameObject asteroid, int divisionNumber)
