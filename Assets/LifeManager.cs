@@ -32,7 +32,7 @@ public class LifeManager : MonoBehaviour {
 
     private void UpdateDebugTextField()
     {
-        DebugTextField.text = "Lives left: " + _livesLeft;
+        DebugTextField.text = "Emergency teleports left: " + _livesLeft;
     }
 
     public bool NoLivesLeft()
@@ -44,6 +44,7 @@ public class LifeManager : MonoBehaviour {
     {
         if (NoLivesLeft())
         {
+            SpawnNuke();
             PlayerAlive = false;
         }
         else
@@ -51,6 +52,13 @@ public class LifeManager : MonoBehaviour {
             SceneReference.RespawnManager.ShowReticle();
         }
     }
+
+    private void SpawnNuke()
+    {
+        var nukeSpawnPoint = SceneReference.PlayerSpawner.GetCentralPlayer();
+        Instantiate(PrefabReference.Nuke, nukeSpawnPoint.transform.position, PrefabReference.Nuke.transform.rotation);
+    }
+
 
     public void DecreaseLifeCount()
     {

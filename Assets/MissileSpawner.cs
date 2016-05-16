@@ -71,13 +71,6 @@ public class MissileSpawner : MonoBehaviour
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.PulseForce, SceneReference.WeaponManager.PulseDrag);
     }
 
-    public void SpawnNuke(Guid shotId, Transform missileSpawnPoint)
-    {
-        var missile = (GameObject)Instantiate(PrefabReference.Nuke, missileSpawnPoint.transform.position, PrefabReference.Nuke.transform.rotation);
-        SceneReference.ShotManager.RegisterShot(shotId, missile);
-        missile.transform.parent = World;
-    }
-
 
     private void PropelForward(GameObject missile, Transform missileSpawnPoint, float force, float drag)
     {

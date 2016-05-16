@@ -36,13 +36,18 @@ public class RespawnManager : MonoBehaviour {
         {
             SceneReference.PlayerSpawner.Spawn(_reticle.transform);
             Repulse(_reticle.transform.position);
-            SceneReference.MissileSpawner.SpawnNuke(Guid.NewGuid(), _reticle.transform);
+            SpawnNuke(_reticle.transform);
             Destroy(_reticle);
             SceneReference.LifeManager.DecreaseLifeCount();
             SceneReference.WeaponManager.InitiateCooldown(RespawnWeaponCooldownMs);
             StartInvulnerability();
             Respawning = false;
         }
+    }
+
+    private void SpawnNuke(Transform nukeSpawnPoint)
+    {
+        Instantiate(PrefabReference.Nuke, nukeSpawnPoint.transform.position, PrefabReference.Nuke.transform.rotation);
     }
 
     private void StartInvulnerability()
