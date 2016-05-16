@@ -10,7 +10,7 @@ public class MissileSpawner : MonoBehaviour
     private GameObject[] _missileSpawnPoints;
 
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
 
@@ -21,7 +21,7 @@ public class MissileSpawner : MonoBehaviour
         SceneReference.MissileSpawner = this;
     }
 
-    void Update () {
+    private void Update () {
 	    if (Input.GetKeyDown(KeyCode.Space) && !SceneReference.WeaponManager.Cooldown)
 	    {
             Guid shotId = Guid.NewGuid();
@@ -71,7 +71,7 @@ public class MissileSpawner : MonoBehaviour
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.PulseForce, SceneReference.WeaponManager.PulseDrag);
     }
 
-    void PropelForward(GameObject missile, Transform missileSpawnPoint, float force, float drag)
+    private void PropelForward(GameObject missile, Transform missileSpawnPoint, float force, float drag)
     {
         var direction = missileSpawnPoint.transform.parent.forward;
         var rigidbody = missile.GetComponent<Rigidbody>();

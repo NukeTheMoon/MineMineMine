@@ -16,7 +16,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
     private int _asteroidsSpawnedCount;
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
 
@@ -74,7 +74,7 @@ public class AsteroidSpawner : MonoBehaviour {
         var smallerAsteroid = (GameObject)Instantiate(PrefabReference.Asteroid, position, Quaternion.identity); // why (clone)(clone)??
     }
 
-    void PropelForward(GameObject asteroid)
+    private void PropelForward(GameObject asteroid)
     {
         var direction = SceneReference.PlayerSpawner.GetCentralPlayer().transform.position - asteroid.transform.position;
         var rigidbody = asteroid.GetComponent<Rigidbody>();

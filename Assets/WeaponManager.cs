@@ -26,12 +26,12 @@ public class WeaponManager : MonoBehaviour {
 
     public bool Cooldown { get; protected set; }
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
     }
 
-    void Start()
+    private void Start()
     {
         ResetWeapon();
     }
@@ -59,6 +59,12 @@ public class WeaponManager : MonoBehaviour {
                 Cooldown = false;
                 break;
         }
+    }
+
+    public void InitiateCooldown(int cooldownMs)
+    {
+        Cooldown = true;
+        StartCoroutine(CooldownCoroutine(cooldownMs));
     }
 
     internal void ChangeWeapon(Weapon _weapon)

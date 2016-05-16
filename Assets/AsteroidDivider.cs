@@ -12,13 +12,13 @@ public class AsteroidDivider : MonoBehaviour {
     private int _maxDivisions = 6;
     private Rigidbody _rigidbody;
 
-	void Start () {
+    private void Start () {
         _id = gameObject.GetInstanceID();
         _rigidbody = GetComponent<Rigidbody>();
 
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == TagsReference.MISSILE)
         {

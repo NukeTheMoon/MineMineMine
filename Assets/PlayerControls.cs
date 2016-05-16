@@ -9,12 +9,12 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody _rigidbody;
 
 
-    void Start()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _rigidbody.AddForce(transform.forward * Input.GetAxis("Vertical") * Speed);
         _rigidbody.AddTorque(transform.up * Input.GetAxis("Horizontal") * AngularSpeed);

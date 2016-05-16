@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class AsteroidBouncer : MonoBehaviour {
-
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (SceneReference.LifeManager.PlayerAlive)
         {

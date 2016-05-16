@@ -13,12 +13,12 @@ public class AsteroidDivisionManager : MonoBehaviour {
     public Dictionary<int, int> DivisionReference = new Dictionary<int, int>();
 
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
     }
 
-    private void RegisterWithSceneReference()
+    public void RegisterWithSceneReference()
     {
         SceneReference.AsteroidDivisionManager = this;
     }

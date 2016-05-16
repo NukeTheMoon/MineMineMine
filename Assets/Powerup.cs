@@ -8,7 +8,7 @@ public class Powerup : MonoBehaviour {
     private Weapon _weapon;
     private TextMesh _debugName;
 
-    void Start()
+    private void Start()
     {
         PickPowerupType();
         SetDebugName();
@@ -34,12 +34,14 @@ public class Powerup : MonoBehaviour {
             case (Weapon.Scattershot):
                 _debugName.text = "SCATTERSHOT";
                 break;
+            case (Weapon.Railgun):
+                _debugName.text = "RAILGUN";
+                break;
         }
     }
 
 
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == TagsReference.PLAYER)
         {

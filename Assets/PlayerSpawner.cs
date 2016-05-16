@@ -22,14 +22,15 @@ public class PlayerSpawner : MonoBehaviour {
     private GameObject _southClone;
     private GameObject _westClone;
     private List<GameObject> _clones;
+    private GameObject _lastKnownPosition;
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
 
     }
 
-	void Start () {
+    private void Start () {
 
         Spawn();
 
@@ -53,12 +54,18 @@ public class PlayerSpawner : MonoBehaviour {
     public void Spawn()
     {
         ChangeCentralPlayer((GameObject)Instantiate(PrefabReference.Player, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation));
-        _clones = new List<GameObject>();
+        CreateClones();
+    }
+
+    public void Spawn(Transform transform)
+    {
+        ChangeCentralPlayer((GameObject)Instantiate(PrefabReference.Player, new Vector3(transform.position.x, PlayerSpawnPoint.position.y, transform.position.z), transform.rotation));
         CreateClones();
     }
 
     private void CreateClones()
     {
+        _clones = new List<GameObject>();
 
         var northClonePosition = new Vector3(_centralPlayer.transform.position.x, _centralPlayer.transform.position.y, _centralPlayer.transform.position.z + VerticalOffset);
         var eastClonePosition = new Vector3(_centralPlayer.transform.position.x + HorizontalOffset, _centralPlayer.transform.position.y, _centralPlayer.transform.position.z);
@@ -141,9 +148,25 @@ public class PlayerSpawner : MonoBehaviour {
 
     public GameObject GetCentralPlayer()
     {
+        if (_centralPlayer == null)
+        {
+            return _lastKnownPosition;
+        }
+        ClearLastKnownPosition();
         return _centralPlayer;
     }
 
-    
+    private void ClearLastKnownPosition()
+    {
+        if (_lastKnownPosition != null)
+        {
+            Destroy(_lastKnownPosition);
+        }
+    }
 
+
+    public void SetLastKnownPlayerPosition(Transform lastKnownTransform)
+    {
+        _lastKnownPosition = (GameObject) Instantiate(PrefabReference.LastKnownPosition, lastKnownTransform.position, lastKnownTransform.rotation);
+    }
 }

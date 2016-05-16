@@ -10,7 +10,7 @@ public class Yield : MonoBehaviour {
     private static Transform _target;
     private Rigidbody _rigidbody;
 
-    void Start()
+    private void Start()
     {
         if (_target == null)
         {
@@ -34,12 +34,12 @@ public class Yield : MonoBehaviour {
         UpdateTarget();
     }
 
-    void Update()
+    private void Update()
     {
 
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (_rigidbody != null)
         {
@@ -47,7 +47,7 @@ public class Yield : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == TagsReference.PLAYER)
         {

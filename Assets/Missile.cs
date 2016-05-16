@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Missile : MonoBehaviour
 {
-    void OnDestroy()
+    private void OnDestroy()
     {
         SceneReference.ShotManager.DestroyMissilesFromSameShot(gameObject);
     }

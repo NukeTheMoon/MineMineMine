@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class RailgunMissile : MonoBehaviour {
-
-
-    void Start()
+    private void Start()
     {
         StartCoroutine(ExpiryCoroutine());
     }

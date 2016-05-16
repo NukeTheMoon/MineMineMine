@@ -7,7 +7,7 @@ public class ScattershotMissile : MonoBehaviour {
     private float _initialLocalScaleX;
     private float _expansionProgress;
 
-	void Start () {
+    private void Start () {
         _initialLocalScaleX = transform.localScale.x;
         _expansionProgress = 0.0f;
         StartCoroutine(ExpiryCoroutine());
@@ -25,7 +25,7 @@ public class ScattershotMissile : MonoBehaviour {
         transform.localScale = new Vector3(Mathf.Lerp(_initialLocalScaleX, SceneReference.WeaponManager.ScattershotExpansion, _expansionProgress), transform.localScale.y, transform.localScale.z);
     }
 
-    void Update () {
+    private void Update () {
         Expand();
 	}
 

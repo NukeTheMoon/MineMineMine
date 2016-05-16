@@ -12,13 +12,13 @@ public class ScoreKeeper : MonoBehaviour {
     private int _asteroidHitValue = 100;
     private bool _scoreDebugFieldNeedsUpdating;
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
 
     }
 
-    void Start()
+    private void Start()
     {
         Score = 0;
         _maxScoreForWave = CalculateMaxScoreForWave();
@@ -30,7 +30,7 @@ public class ScoreKeeper : MonoBehaviour {
         SceneReference.ScoreKeeper = this;
     }
 
-    void Update()
+    private void Update()
     {
         if (_scoreDebugFieldNeedsUpdating)
         {
@@ -55,7 +55,7 @@ public class ScoreKeeper : MonoBehaviour {
         _scoreDebugFieldNeedsUpdating = true;
     }
 
-    void UpdateScoreDebugTextField()
+    private void UpdateScoreDebugTextField()
     {
         ScoreDebugTextField.text = "Score: " + Score + "/" + _maxScoreForWave;
     }

@@ -12,13 +12,13 @@ public class LifeManager : MonoBehaviour {
 
     private int _livesLeft;
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
 
     }
 
-    void Start()
+    private void Start()
     {
         PlayerAlive = true;
         _livesLeft = StartingLives;
@@ -37,10 +37,10 @@ public class LifeManager : MonoBehaviour {
 
     public bool NoLivesLeft()
     {
-        return _livesLeft < 0;
+        return _livesLeft <= 0;
     }
 
-    public void LoseLife()
+    public void Die()
     {
         if (NoLivesLeft())
         {
@@ -48,9 +48,13 @@ public class LifeManager : MonoBehaviour {
         }
         else
         {
-            SceneReference.PlayerSpawner.Spawn();
-            --_livesLeft;
-            UpdateDebugTextField();
+            SceneReference.RespawnManager.ShowReticle();
         }
+    }
+
+    public void DecreaseLifeCount()
+    {
+        --_livesLeft;
+        UpdateDebugTextField();
     }
 }

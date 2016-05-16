@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PrefabReference : MonoBehaviour {
-
+public class PrefabReference : MonoBehaviour {  
 
     [SerializeField]
     private GameObject _player;
@@ -18,6 +17,10 @@ public class PrefabReference : MonoBehaviour {
     private GameObject _yield;
     [SerializeField]
     private GameObject _powerup;
+    [SerializeField]
+    private GameObject _reticle;
+    [SerializeField]
+    private GameObject _lastKnownPosition;
 
     public static GameObject Player;
     public static GameObject PulseMissile;
@@ -26,8 +29,10 @@ public class PrefabReference : MonoBehaviour {
     public static GameObject Asteroid;
     public static GameObject Yield;
     public static GameObject Powerup;
+    public static GameObject Reticle;
+    public static GameObject LastKnownPosition;
 
-    void Awake()
+    private void Awake()
     {
         Player = _player;
         PulseMissile = _pulseMissile;
@@ -36,6 +41,8 @@ public class PrefabReference : MonoBehaviour {
         Asteroid = _asteroid;
         Yield = _yield;
         Powerup = _powerup;
+        Reticle = _reticle;
+        LastKnownPosition = _lastKnownPosition;
     }
 
 }

@@ -10,12 +10,12 @@ public class PowerupManager : MonoBehaviour {
     public int CooldownDurationSeconds;
     public bool Cooldown { get; protected set; }
 
-    void Awake()
+    private void Awake()
     {
         RegisterWithSceneReference();
     }
 
-    void Start()
+    private void Start()
     {
         Cooldown = false;
     }

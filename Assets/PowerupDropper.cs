@@ -5,12 +5,12 @@ public class PowerupDropper : MonoBehaviour {
 
     private bool _isQuitting;
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         _isQuitting = true;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (!_isQuitting && !SceneReference.PowerupManager.Cooldown)
         {
