@@ -156,6 +156,14 @@ public class PlayerSpawner : MonoBehaviour {
         return _centralPlayer;
     }
 
+    public List<GameObject> GetAllPlayers()
+    {
+        var players = new List<GameObject>();
+        players.Add(_centralPlayer);
+        players.AddRange(_clones);
+        return players;
+    }
+
     private void ClearLastKnownPosition()
     {
         if (_lastKnownPosition != null)

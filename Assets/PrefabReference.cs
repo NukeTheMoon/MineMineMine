@@ -3,24 +3,16 @@ using System.Collections;
 
 public class PrefabReference : MonoBehaviour {  
 
-    [SerializeField]
-    private GameObject _player;
-    [SerializeField]
-    private GameObject _pulseMissile;
-    [SerializeField]
-    private GameObject _scattershotMissile;
-    [SerializeField]
-    private GameObject _railgunMissile;
-    [SerializeField]
-    private GameObject _asteroid;
-    [SerializeField]
-    private GameObject _yield;
-    [SerializeField]
-    private GameObject _powerup;
-    [SerializeField]
-    private GameObject _reticle;
-    [SerializeField]
-    private GameObject _lastKnownPosition;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _pulseMissile;
+    [SerializeField] private GameObject _scattershotMissile;
+    [SerializeField] private GameObject _railgunMissile;
+    [SerializeField] private GameObject _asteroid;
+    [SerializeField] private GameObject _yield;
+    [SerializeField] private GameObject _powerup;
+    [SerializeField] private GameObject _reticle;
+    [SerializeField] private GameObject _lastKnownPosition;
+    [SerializeField] private GameObject _protectionRing;
 
     public static GameObject Player;
     public static GameObject PulseMissile;
@@ -31,6 +23,7 @@ public class PrefabReference : MonoBehaviour {
     public static GameObject Powerup;
     public static GameObject Reticle;
     public static GameObject LastKnownPosition;
+    public static GameObject ProtectionRing;
 
     private void Awake()
     {
@@ -43,6 +36,7 @@ public class PrefabReference : MonoBehaviour {
         Powerup = _powerup;
         Reticle = _reticle;
         LastKnownPosition = _lastKnownPosition;
+        ProtectionRing = _protectionRing;
     }
 
 }
