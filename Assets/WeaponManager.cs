@@ -23,6 +23,8 @@ public class WeaponManager : MonoBehaviour {
     public int RailgunCooldownMs;
     public bool RailgunPunchthrough = true;
 
+    public int NukeLifeMs;
+    public float NukeExpansion;
 
     public bool Cooldown { get; protected set; }
 

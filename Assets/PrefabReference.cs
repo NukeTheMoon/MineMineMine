@@ -13,6 +13,7 @@ public class PrefabReference : MonoBehaviour {
     [SerializeField] private GameObject _reticle;
     [SerializeField] private GameObject _lastKnownPosition;
     [SerializeField] private GameObject _protectionRing;
+    [SerializeField] private GameObject _nuke;
 
     public static GameObject Player;
     public static GameObject PulseMissile;
@@ -24,6 +25,7 @@ public class PrefabReference : MonoBehaviour {
     public static GameObject Reticle;
     public static GameObject LastKnownPosition;
     public static GameObject ProtectionRing;
+    public static GameObject Nuke;
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class PrefabReference : MonoBehaviour {
         Reticle = _reticle;
         LastKnownPosition = _lastKnownPosition;
         ProtectionRing = _protectionRing;
+        Nuke = _nuke;
     }
 
 }

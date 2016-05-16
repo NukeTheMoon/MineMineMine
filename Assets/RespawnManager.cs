@@ -8,6 +8,8 @@ public class RespawnManager : MonoBehaviour {
     public Transform ReticleSpawnPoint;
     public int RespawnWeaponCooldownMs;
     public int RespawnInvulnerabilityMs;
+    public float RepulsionRadius;
+    public float RepulsionForce;
 
     public bool Respawning { get; private set; }
     public bool Invulnerability { get; private set; }
@@ -33,6 +35,8 @@ public class RespawnManager : MonoBehaviour {
         if (_reticle != null && Input.GetKeyDown(KeyCode.Space))
         {
             SceneReference.PlayerSpawner.Spawn(_reticle.transform);
+            Repulse(_reticle.transform.position);
+            SceneReference.MissileSpawner.SpawnNuke(Guid.NewGuid(), _reticle.transform);
             Destroy(_reticle);
             SceneReference.LifeManager.DecreaseLifeCount();
             SceneReference.WeaponManager.InitiateCooldown(RespawnWeaponCooldownMs);
@@ -100,5 +104,17 @@ public class RespawnManager : MonoBehaviour {
         }
     }
 
+    private void Repulse(Vector3 explosionPosition)
+    {
+        var colliders = Physics.OverlapSphere(explosionPosition, RepulsionRadius);
+        for (var i = 0; i < colliders.Length; ++i)
+        {
+            if (colliders[i].gameObject.tag == TagsReference.ASTEROID) { 
+                var rigidbody = colliders[i].GetComponent<Rigidbody>();
+                if (rigidbody != null)
+                    rigidbody.AddExplosionForce(RepulsionForce, explosionPosition, RepulsionForce, 0.0f);
+            }
 
+        }
+    }
 }

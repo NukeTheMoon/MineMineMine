@@ -48,14 +48,14 @@ public class MissileSpawner : MonoBehaviour
 	    }
 	}
 
-    private void SpawnRailgunMissile(Guid shotId, Transform missileSpawnPoint)
+    public void SpawnRailgunMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.RailgunMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
         missile.transform.parent = World;
     }
 
-    private void SpawnScattershotMissile(Guid shotId, Transform missileSpawnPoint)
+    public void SpawnScattershotMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.ScattershotMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
@@ -63,13 +63,21 @@ public class MissileSpawner : MonoBehaviour
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.ScattershotForce, SceneReference.WeaponManager.ScattershotDrag);
     }
 
-    private void SpawnPulseMissile(Guid shotId, Transform missileSpawnPoint)
+    public void SpawnPulseMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.PulseMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
         missile.transform.parent = World;
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.PulseForce, SceneReference.WeaponManager.PulseDrag);
     }
+
+    public void SpawnNuke(Guid shotId, Transform missileSpawnPoint)
+    {
+        var missile = (GameObject)Instantiate(PrefabReference.Nuke, missileSpawnPoint.transform.position, PrefabReference.Nuke.transform.rotation);
+        SceneReference.ShotManager.RegisterShot(shotId, missile);
+        missile.transform.parent = World;
+    }
+
 
     private void PropelForward(GameObject missile, Transform missileSpawnPoint, float force, float drag)
     {
