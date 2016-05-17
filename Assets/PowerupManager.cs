@@ -13,6 +13,7 @@ public class PowerupManager : MonoBehaviour {
     public int ScattershotBoostExpansionIncrease;
     public int RailgunBoostCooldownDecrease;
     public int RailgunBoostLifeMsIncrease;
+    public int ShieldAddAmmoAmount;
 
     private void Awake()
     {

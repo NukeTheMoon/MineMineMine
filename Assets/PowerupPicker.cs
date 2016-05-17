@@ -36,6 +36,9 @@ public class PowerupPicker : MonoBehaviour {
             case (Powerup.RailgunBoost):
                 _debugName.text = "RAILGUN BOOST";
                 break;
+            case (Powerup.ShieldAmmo):
+                _debugName.text = "SHIELD AMMO";
+                break;
         }
     }
 
@@ -64,6 +67,9 @@ public class PowerupPicker : MonoBehaviour {
                     }
                     SceneReference.WeaponManager.RailgunLifeMs +=
                         SceneReference.PowerupManager.RailgunBoostLifeMsIncrease;
+                    break;
+                case (Powerup.ShieldAmmo):
+                    SceneReference.WeaponManager.AddAmmo(Weapon.Shield, SceneReference.PowerupManager.ShieldAddAmmoAmount);
                     break;
             }
             Destroy(gameObject);

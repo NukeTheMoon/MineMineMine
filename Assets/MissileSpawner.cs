@@ -54,6 +54,7 @@ public class MissileSpawner : MonoBehaviour
             SceneReference.WeaponManager.ConsumeAmmo();
             SceneReference.WeaponManager.InitiateCooldown();
 	    }
+
 	}
 
     public void SpawnRailgunMissile(Guid shotId, Transform missileSpawnPoint)

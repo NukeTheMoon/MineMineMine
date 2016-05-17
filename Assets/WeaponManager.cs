@@ -39,6 +39,9 @@ public class WeaponManager : MonoBehaviour {
     public int NukeLifeMs;
     public float NukeExpansion;
 
+    public int ShieldInitialAmmo;
+    private int _shieldAmmo;
+
     public Text DebugText;
 
     private void Awake()
@@ -68,6 +71,11 @@ public class WeaponManager : MonoBehaviour {
         {
             ChangeWeapon(Weapon.Railgun);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && !SceneReference.RespawnManager.Invulnerability && HaveAmmo(Weapon.Shield))
+        {
+            SceneReference.RespawnManager.StartInvulnerability();
+            ConsumeAmmo(Weapon.Shield);
+        }
         UpdateDebugText();
 
     }
@@ -88,6 +96,7 @@ public class WeaponManager : MonoBehaviour {
         _pulseAmmo = PulseInitialAmmo;
         _scattershotAmmo = ScattershotInitialAmmo;
         _railgunAmmo = RailgunInitialAmmo;
+        _shieldAmmo = ShieldInitialAmmo;
     }
 
     public void InitiateCooldown()
@@ -203,6 +212,23 @@ public class WeaponManager : MonoBehaviour {
         }
     }
 
+    public bool HaveAmmo(Weapon specificWeapon)
+    {
+        switch (specificWeapon)
+        {
+            case Weapon.PulseEmitter:
+                return _pulseAmmo > 0 || _pulseAmmo == -1;
+            case Weapon.Scattershot:
+                return _scattershotAmmo > 0 || _scattershotAmmo == -1;
+            case Weapon.Railgun:
+                return _railgunAmmo > 0 || _railgunAmmo == -1;
+            case Weapon.Shield:
+                return _shieldAmmo > 0 || _shieldAmmo == -1;
+            default:
+                return false;
+        }
+    }
+
     public bool CanFire()
     {
         return !IsInCooldown() && HaveAmmo();
@@ -221,6 +247,28 @@ public class WeaponManager : MonoBehaviour {
             case Weapon.Railgun:
                 if (_railgunAmmo > 0) --_railgunAmmo;
                 break;
+            case Weapon.Shield:
+                if (_shieldAmmo > 0) --_shieldAmmo;
+                break;
+        }
+    }
+
+    public void ConsumeAmmo(Weapon specificWeapon)
+    {
+        switch (specificWeapon)
+        {
+            case Weapon.PulseEmitter:
+                if (_pulseAmmo > 0) --_pulseAmmo;
+                break;
+            case Weapon.Scattershot:
+                if (_scattershotAmmo > 0) --_scattershotAmmo;
+                break;
+            case Weapon.Railgun:
+                if (_railgunAmmo > 0) --_railgunAmmo;
+                break;
+            case Weapon.Shield:
+                if (_shieldAmmo > 0) -- _shieldAmmo;
+                break;
         }
     }
 
@@ -236,6 +284,9 @@ public class WeaponManager : MonoBehaviour {
                 break;
             case Weapon.Railgun:
                 _railgunAmmo += amount;
+                break;
+            case Weapon.Shield:
+                _shieldAmmo += amount;
                 break;
         }
     }
