@@ -39,7 +39,7 @@ public class RespawnManager : MonoBehaviour {
             SpawnNuke(_reticle.transform);
             Destroy(_reticle);
             SceneReference.LifeManager.DecreaseLifeCount();
-            SceneReference.WeaponManager.InitiateCooldown(RespawnWeaponCooldownMs);
+            SceneReference.WeaponManager.StartGlobalCooldown(RespawnWeaponCooldownMs);
             StartInvulnerability();
             Respawning = false;
         }

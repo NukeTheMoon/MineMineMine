@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour {
 
@@ -11,6 +12,9 @@ public class WeaponManager : MonoBehaviour {
     public int PulseCooldownMs = 0;
     public float PulseDrag = 0;
     public bool PulsePunchthrough = false;
+    public int PulseInitialAmmo;
+    private int _pulseAmmo;
+    private bool _pulseCooldown;
 
     public int ScattershotLifeMs;
     public int ScattershotExpansion;
@@ -18,15 +22,24 @@ public class WeaponManager : MonoBehaviour {
     public float ScattershotForce = 10000.0f;
     public float ScattershotDrag = 1;
     public bool ScattershotPunchthrough = true;
+    public int ScattershotInitialAmmo;
+    private int _scattershotAmmo;
+    private bool _scattershotCooldown;
+    private int _initialScattershotExpansion;
 
     public int RailgunLifeMs = 20;
     public int RailgunCooldownMs;
     public bool RailgunPunchthrough = true;
+    public int RailgunInitialAmmo;
+    private int _railgunAmmo;
+    private bool _railgunCooldown;
+    private int _initialRailgunCooldownMs;
+    private int _initialRailgunLifeMs;
 
     public int NukeLifeMs;
     public float NukeExpansion;
 
-    public bool Cooldown { get; protected set; }
+    public Text DebugText;
 
     private void Awake()
     {
@@ -35,50 +48,104 @@ public class WeaponManager : MonoBehaviour {
 
     private void Start()
     {
+        _initialScattershotExpansion = ScattershotExpansion;
+        _initialRailgunCooldownMs = RailgunCooldownMs;
+        _initialRailgunLifeMs = RailgunLifeMs;
         ResetWeapon();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChangeWeapon(Weapon.PulseEmitter);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangeWeapon(Weapon.Scattershot);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangeWeapon(Weapon.Railgun);
+        }
+        UpdateDebugText();
+
+    }
+
+    private void UpdateDebugText()
+    {
+        DebugText.text = "Pulse ammo: " + _pulseAmmo + 
+            "\nScattershot ammo: " + _scattershotAmmo + 
+            "\nRailgun ammo: " + _railgunAmmo;
     }
 
     public void ResetWeapon()
     {
         ChangeWeapon(InitialWeapon);
+        ScattershotExpansion = _initialScattershotExpansion;
+        RailgunCooldownMs = _initialRailgunCooldownMs;
+        RailgunLifeMs = _initialRailgunLifeMs;
+        _pulseAmmo = PulseInitialAmmo;
+        _scattershotAmmo = ScattershotInitialAmmo;
+        _railgunAmmo = RailgunInitialAmmo;
     }
 
     public void InitiateCooldown()
     {
-        Cooldown = true;
         switch (CurrentWeapon)
         {
             case (Weapon.PulseEmitter):
-                StartCoroutine(CooldownCoroutine(PulseCooldownMs));
+                _pulseCooldown = true;
+                StartCoroutine(CooldownCoroutine(PulseCooldownMs, Weapon.PulseEmitter));
                 break;
             case (Weapon.Scattershot):
-                StartCoroutine(CooldownCoroutine(ScattershotCooldownMs));
+                _scattershotCooldown = true;
+                StartCoroutine(CooldownCoroutine(ScattershotCooldownMs, Weapon.Scattershot));
                 break;
             case (Weapon.Railgun):
-                StartCoroutine(CooldownCoroutine(RailgunCooldownMs));
-                break;
-            default:
-                Cooldown = false;
+                _railgunCooldown = true;
+                StartCoroutine(CooldownCoroutine(RailgunCooldownMs, Weapon.Railgun));
                 break;
         }
     }
 
-    public void InitiateCooldown(int cooldownMs)
+    public void StartGlobalCooldown(int cooldownMs)
     {
-        Cooldown = true;
-        StartCoroutine(CooldownCoroutine(cooldownMs));
+        _pulseCooldown = true;
+        _scattershotCooldown = true;
+        _railgunCooldown = true;
+        StartCoroutine(GlobalCooldownCoroutine(cooldownMs));
+    }
+
+    private IEnumerator GlobalCooldownCoroutine(int cooldownMs)
+    {
+        yield return new WaitForSeconds(TimeHelper.MillisecondsToSeconds(cooldownMs));
+        _pulseCooldown = false;
+        _scattershotCooldown = false;
+        _railgunCooldown = false;
+
     }
 
     internal void ChangeWeapon(Weapon _weapon)
     {
         CurrentWeapon = _weapon;
-        ResetCooldown();
     }
 
-    private IEnumerator CooldownCoroutine(int cooldownMs)
+    private IEnumerator CooldownCoroutine(int cooldownMs, Weapon weapon)
     {
         yield return new WaitForSeconds(TimeHelper.MillisecondsToSeconds(cooldownMs));
-        Cooldown = false;
+        switch (weapon)
+        {
+            case Weapon.PulseEmitter:
+                _pulseCooldown = false;
+                break;
+            case Weapon.Scattershot:
+                _scattershotCooldown = false;
+                break;
+            case Weapon.Railgun:
+                _railgunCooldown = false;
+                break;
+        }
     }
 
     public bool IsPunchthrough()
@@ -94,14 +161,75 @@ public class WeaponManager : MonoBehaviour {
         }
     }
 
-    public void ResetCooldown()
-    {
-        Cooldown = false;
-    }
-
     private void RegisterWithSceneReference()
     {
         SceneReference.WeaponManager = this;
     }
-	
+
+    public bool IsInCooldown()
+    {
+        switch (CurrentWeapon)
+        {
+            case Weapon.PulseEmitter:
+                return _pulseCooldown;
+            case Weapon.Scattershot:
+                return _scattershotCooldown;
+            case Weapon.Railgun:
+                return _railgunCooldown;
+            default:
+                return false;
+        }
+    }
+
+    public bool HaveAmmo()
+    {
+        switch (CurrentWeapon)
+        {
+            case Weapon.PulseEmitter:
+                return _pulseAmmo > 0 || _pulseAmmo == -1;
+            case Weapon.Scattershot:
+                return _scattershotAmmo > 0 || _scattershotAmmo == -1;
+            case Weapon.Railgun:
+                return _railgunAmmo > 0 || _railgunAmmo == -1;
+            default:
+                return false;
+        }
+    }
+
+    public bool CanFire()
+    {
+        return !IsInCooldown() && HaveAmmo();
+    }
+
+    public void ConsumeAmmo()
+    {
+        switch (CurrentWeapon)
+        {
+            case Weapon.PulseEmitter:
+                if (_pulseAmmo > 0) --_pulseAmmo;
+                break;
+            case Weapon.Scattershot:
+                if (_scattershotAmmo > 0) --_scattershotAmmo;
+                break;
+            case Weapon.Railgun:
+                if (_railgunAmmo > 0) --_railgunAmmo;
+                break;
+        }
+    }
+
+    public void AddAmmo(Weapon weapon, int amount)
+    {
+        switch (weapon)
+        {
+            case Weapon.PulseEmitter:
+                _pulseAmmo += amount;
+                break;
+            case Weapon.Scattershot:
+                _scattershotAmmo += amount; ;
+                break;
+            case Weapon.Railgun:
+                _railgunAmmo += amount;
+                break;
+        }
+    }
 }

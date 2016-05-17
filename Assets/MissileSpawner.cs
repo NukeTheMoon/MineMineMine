@@ -22,7 +22,7 @@ public class MissileSpawner : MonoBehaviour
     }
 
     private void Update () {
-	    if (Input.GetKeyDown(KeyCode.Space) && !SceneReference.WeaponManager.Cooldown)
+	    if (Input.GetKeyDown(KeyCode.Space) && SceneReference.WeaponManager.CanFire())
 	    {
             Guid shotId = Guid.NewGuid();
             _missileSpawnPoints = GameObject.FindGameObjectsWithTag("MissileSpawnPoint");
@@ -44,6 +44,7 @@ public class MissileSpawner : MonoBehaviour
                         break;
                 }             
             }
+            SceneReference.WeaponManager.ConsumeAmmo();
             SceneReference.WeaponManager.InitiateCooldown();
 	    }
 	}

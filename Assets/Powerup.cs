@@ -1,53 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-using UnityEngine.UI;
-
-public class Powerup : MonoBehaviour {
-
-    private Weapon _weapon;
-    private TextMesh _debugName;
-
-    private void Start()
-    {
-        PickPowerupType();
-        SetDebugName();
-    }
-
-    private void PickPowerupType()
-    {
-        _weapon = (Weapon)UnityEngine.Random.Range(0, Enum.GetNames(typeof(Weapon)).Length);
-        if (_weapon == SceneReference.WeaponManager.CurrentWeapon)
-        {
-            PickPowerupType();
-        }
-    }
-
-    private void SetDebugName()
-    {
-        _debugName = GetComponentInChildren<TextMesh>();
-        switch (_weapon)
-        {
-            case (Weapon.PulseEmitter):
-                _debugName.text = "PULSE EMITTER";
-                break;
-            case (Weapon.Scattershot):
-                _debugName.text = "SCATTERSHOT";
-                break;
-            case (Weapon.Railgun):
-                _debugName.text = "RAILGUN";
-                break;
-        }
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == TagsReference.PLAYER)
-        {
-            SceneReference.WeaponManager.ChangeWeapon(_weapon);
-            Destroy(gameObject);
-        }
-    }
-
+﻿public enum Powerup
+{
+    ScattershotAmmo = 0,
+    RailgunAmmo = 1,
+    ScattershotBoost = 2,
+    RailgunBoost = 3
 }

@@ -5,10 +5,14 @@ using System;
 public class PowerupManager : MonoBehaviour {
 
 
-    [Range(0,1)]
-    public float DropChance;
+    [Range(0,1)] public float DropChance;
     public int CooldownDurationSeconds;
     public bool Cooldown { get; protected set; }
+    public int ScattershotAddAmmoAmount;
+    public int RailgunAddAmmoAmount;
+    public int ScattershotBoostExpansionIncrease;
+    public int RailgunBoostCooldownDecrease;
+    public int RailgunBoostLifeMsIncrease;
 
     private void Awake()
     {
