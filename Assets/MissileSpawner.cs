@@ -7,6 +7,8 @@ public class MissileSpawner : MonoBehaviour
 {
     public Transform World;
 
+    public Dictionary<int, Weapon> WeaponTypeOfMissileId { get; private set; }
+
     private GameObject[] _missileSpawnPoints;
 
 
@@ -14,6 +16,11 @@ public class MissileSpawner : MonoBehaviour
     {
         RegisterWithSceneReference();
 
+    }
+
+    private void Start()
+    {
+        WeaponTypeOfMissileId = new Dictionary<int, Weapon>();
     }
 
     private void RegisterWithSceneReference()
@@ -52,6 +59,7 @@ public class MissileSpawner : MonoBehaviour
     public void SpawnRailgunMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.RailgunMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
+        WeaponTypeOfMissileId.Add(missile.GetInstanceID(), Weapon.Railgun);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
         missile.transform.parent = World;
     }
@@ -59,6 +67,7 @@ public class MissileSpawner : MonoBehaviour
     public void SpawnScattershotMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.ScattershotMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
+        WeaponTypeOfMissileId.Add(missile.GetInstanceID(), Weapon.Scattershot);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
         missile.transform.parent = World;
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.ScattershotForce, SceneReference.WeaponManager.ScattershotDrag);
@@ -67,6 +76,7 @@ public class MissileSpawner : MonoBehaviour
     public void SpawnPulseMissile(Guid shotId, Transform missileSpawnPoint)
     {
         var missile = (GameObject)Instantiate(PrefabReference.PulseMissile, missileSpawnPoint.transform.position, missileSpawnPoint.transform.parent.rotation);
+        WeaponTypeOfMissileId.Add(missile.GetInstanceID(), Weapon.PulseEmitter);
         SceneReference.ShotManager.RegisterShot(shotId, missile);
         missile.transform.parent = World;
         PropelForward(missile, missileSpawnPoint, SceneReference.WeaponManager.PulseForce, SceneReference.WeaponManager.PulseDrag);

@@ -34,7 +34,7 @@ public class AsteroidDivider : MonoBehaviour {
 
     private void Punchthrough(GameObject missile)
     {
-        if (!SceneReference.WeaponManager.IsPunchthrough())
+        if (!SceneReference.WeaponManager.IsPunchthrough(missile.GetInstanceID()))
         {
             Destroy(missile);
         }

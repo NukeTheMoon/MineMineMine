@@ -148,7 +148,7 @@ public class PlayerSpawner : MonoBehaviour {
 
     public GameObject GetCentralPlayer()
     {
-        if (_centralPlayer == null)
+        if (_centralPlayer == null || SceneReference.LifeManager.NoLivesLeft())
         {
             return _lastKnownPosition;
         }

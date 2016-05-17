@@ -47,7 +47,7 @@ public class RespawnManager : MonoBehaviour {
 
     private void SpawnNuke(Transform nukeSpawnPoint)
     {
-        Instantiate(PrefabReference.Nuke, nukeSpawnPoint.transform.position, PrefabReference.Nuke.transform.rotation);
+        Instantiate(PrefabReference.Nuke, new Vector3(nukeSpawnPoint.transform.position.x, 0, nukeSpawnPoint.transform.position.z), PrefabReference.Nuke.transform.rotation);
     }
 
     private void StartInvulnerability()

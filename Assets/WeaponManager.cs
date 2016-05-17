@@ -148,17 +148,24 @@ public class WeaponManager : MonoBehaviour {
         }
     }
 
-    public bool IsPunchthrough()
+    public bool IsPunchthrough(int missileId)
     {
-        switch (CurrentWeapon)
+        Weapon weaponType;
+        if (SceneReference.MissileSpawner.WeaponTypeOfMissileId.TryGetValue(missileId, out weaponType))
         {
-            case (Weapon.PulseEmitter):
-                return PulsePunchthrough;
-            case (Weapon.Scattershot):
-                return ScattershotPunchthrough;
-            default:
-                return true;
+            switch (weaponType)
+            {
+                case (Weapon.PulseEmitter):
+                    return PulsePunchthrough;
+                case (Weapon.Scattershot):
+                    return ScattershotPunchthrough;
+                default:
+                    return true;
+            }
         }
+
+        return true;
+        
     }
 
     private void RegisterWithSceneReference()
