@@ -15,6 +15,9 @@ public class PowerupManager : MonoBehaviour {
     public int RailgunBoostLifeMsIncrease;
     public int ShieldAddAmmoAmount;
 
+    private int _scattershotBoostLevel;
+    private int _railgunBoostLevel;
+
     private void Awake()
     {
         RegisterWithSceneReference();
@@ -23,6 +26,7 @@ public class PowerupManager : MonoBehaviour {
     private void Start()
     {
         Cooldown = false;
+        ResetBoostLevels();
     }
 
     public void InitiateCooldown()
@@ -35,6 +39,22 @@ public class PowerupManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(CooldownDurationSeconds);
         Cooldown = false;
+    }
+
+    public void IncreaseScattershotBoostLevel()
+    {
+        ++_scattershotBoostLevel;
+    }
+
+    public void IncreaseRailgunBoostLevel()
+    {
+        ++_railgunBoostLevel;
+    }
+
+    public void ResetBoostLevels()
+    {
+        _scattershotBoostLevel = 0;
+        _railgunBoostLevel = 0;
     }
 
     private void RegisterWithSceneReference()

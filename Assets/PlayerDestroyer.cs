@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PlayerDestroyer : MonoBehaviour {
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == PlayerSpawner.CENTRAL_PLAYER && !SceneReference.RespawnManager.Invulnerability)

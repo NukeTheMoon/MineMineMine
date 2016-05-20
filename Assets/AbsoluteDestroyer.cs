@@ -5,10 +5,10 @@ public class AbsoluteDestroyer : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != null)
-        {
-            Destroy(other.gameObject);
-        }
+
+        Debug.Log("ABSOLUTE DESTRUCTION: " + other.gameObject.name);
+        Destroy(other.gameObject);
+        
     }
 
 }

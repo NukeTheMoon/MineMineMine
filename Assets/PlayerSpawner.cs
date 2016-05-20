@@ -110,7 +110,7 @@ public class PlayerSpawner : MonoBehaviour {
     {
         for (var i=0; i<_clones.Count; ++i)
         {
-            if (_clones[i].GetInstanceID() != protectedClone.GetInstanceID())
+            if (_clones[i].GetInstanceID() != protectedClone.GetInstanceID() && _clones[i] != null)
             {
                 Destroy(_clones[i]);
             }
@@ -148,11 +148,14 @@ public class PlayerSpawner : MonoBehaviour {
 
     public GameObject GetCentralPlayer()
     {
-        if (_centralPlayer == null || SceneReference.LifeManager.NoLivesLeft())
+        if (_centralPlayer == null || _centralPlayer.Equals(null) || SceneReference.LifeManager.NoLivesLeft())
         {
+            if (_lastKnownPosition == null)
+            {
+                Debug.LogError("Trying to access last known position when it is not set!");
+            }
             return _lastKnownPosition;
         }
-        ClearLastKnownPosition();
         return _centralPlayer;
     }
 
@@ -175,6 +178,7 @@ public class PlayerSpawner : MonoBehaviour {
 
     public void SetLastKnownPlayerPosition(Transform lastKnownTransform)
     {
+        ClearLastKnownPosition();
         _lastKnownPosition = (GameObject) Instantiate(PrefabReference.LastKnownPosition, lastKnownTransform.position, lastKnownTransform.rotation);
     }
 }

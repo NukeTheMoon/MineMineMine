@@ -49,7 +49,7 @@ public class AsteroidDivider : MonoBehaviour {
             {
                 divisionNumber = Math.Min(_maxDivisions, SceneReference.AsteroidDivisionManager.DivisionReference[_id] + 1);
             }
-            var smallerAsteroid = (GameObject)Instantiate(PrefabReference.Asteroid, JitterPosition(transform.position, divisionNumber), Quaternion.identity); // why (clone)(clone)??
+            var smallerAsteroid = (GameObject)Instantiate(PrefabReference.Asteroid, JitterPosition(transform.position, divisionNumber), Quaternion.identity);
             SceneReference.AsteroidDivisionManager.DivisionReference.Add(smallerAsteroid.GetInstanceID(), divisionNumber);
             smallerAsteroid.name = "Asteroid:" + divisionNumber;
             ApplySize(smallerAsteroid, divisionNumber);

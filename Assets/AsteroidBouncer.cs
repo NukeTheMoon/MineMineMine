@@ -4,15 +4,12 @@ using System.Collections;
 public class AsteroidBouncer : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
-        if (SceneReference.LifeManager.PlayerAlive)
+        if (other.gameObject.tag == TagsReference.ASTEROID)
         {
-            if (other.gameObject.tag == TagsReference.ASTEROID)
-            {
-                var rigidbody = other.gameObject.GetComponent<Rigidbody>();
-                rigidbody.velocity = Vector3.zero;
-                var direction = SceneReference.PlayerSpawner.GetCentralPlayer().transform.position - other.gameObject.transform.position;
-                rigidbody.AddForce(direction * SceneReference.AsteroidSpawner.AsteroidSpeed);
-            }
+            var rigidbody = other.gameObject.GetComponent<Rigidbody>();
+            rigidbody.velocity = Vector3.zero;
+            var direction = SceneReference.PlayerSpawner.GetCentralPlayer().transform.position - other.gameObject.transform.position;
+            rigidbody.AddForce(direction * SceneReference.AsteroidSpawner.AsteroidSpeed);
         }
     }
 }
