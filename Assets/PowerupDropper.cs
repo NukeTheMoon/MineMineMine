@@ -15,7 +15,7 @@ public class PowerupDropper : MonoBehaviour {
         if (!_isQuitting && !SceneReference.PowerupManager.Cooldown)
         {
             var diceRoll = UnityEngine.Random.Range(0.0f, 1.0f);
-            if (diceRoll <= SceneReference.PowerupManager.DropChance)
+            if (SceneReference.ScoreKeeper.Score == 0 || diceRoll <= SceneReference.PowerupManager.DropChance)
             {
                 SceneReference.PowerupManager.InitiateCooldown();
                 Instantiate(PrefabReference.Powerup, transform.position, Quaternion.identity);

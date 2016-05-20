@@ -82,9 +82,10 @@ public class WeaponManager : MonoBehaviour {
 
     private void UpdateDebugText()
     {
-        DebugText.text = "Pulse ammo: " + _pulseAmmo + 
-            "\nScattershot ammo: " + _scattershotAmmo + 
-            "\nRailgun ammo: " + _railgunAmmo;
+        DebugText.text = "Pulse ammo: " + _pulseAmmo +
+                         "\nScattershot ammo: " + _scattershotAmmo +
+                         "\nRailgun ammo: " + _railgunAmmo +
+                         "\nShield ammo: " + _shieldAmmo;
     }
 
     public void ResetWeapon()

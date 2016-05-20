@@ -12,13 +12,9 @@ public class Yield : MonoBehaviour {
 
     private void Start()
     {
-        if (_target == null)
-        {
-            UpdateTarget();
-        }
+        UpdateTarget();
         _rigidbody = GetComponent<Rigidbody>();
         SceneReference.PlayerSpawner.OnCentralPlayerChanged += PlayerSpawner_OnCentralPlayerChanged;
-
     }
 
     private void UpdateTarget()

@@ -12,6 +12,7 @@ public class AsteroidSpawner : MonoBehaviour {
     public float AsteroidSpeed;
     public float StartDelaySeconds;
     public float IntervalSeconds;
+    public int MinAsteroidCount;
     public int MaxAsteroidCount;
 
     private int _asteroidsSpawnedCount;
@@ -22,18 +23,18 @@ public class AsteroidSpawner : MonoBehaviour {
 
     }
 
-    public void Start()
-    {
-        InvokeRepeating("Spawn", StartDelaySeconds, IntervalSeconds);
-
-    }
-
     private void RegisterWithSceneReference()
     {
         SceneReference.AsteroidSpawner = this;
     }
 
-    public void Spawn()
+    public void StartSpawning()
+    {
+        _asteroidsSpawnedCount = 0;
+        InvokeRepeating("Spawn", StartDelaySeconds, IntervalSeconds);
+    }
+
+    private void Spawn()
     {
         if (_asteroidsSpawnedCount++ < MaxAsteroidCount)
         {
@@ -45,18 +46,22 @@ public class AsteroidSpawner : MonoBehaviour {
             {
                 case 0: // along AB
                     spawnVerticalPosition = AsteroidSpawnBoundaryA.position.z;
-                    spawnHorizontalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryA.position.x, AsteroidSpawnBoundaryB.position.x);
+                    spawnHorizontalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryA.position.x,
+                        AsteroidSpawnBoundaryB.position.x);
                     break;
                 case 1: // along BC
-                    spawnVerticalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryC.position.z, AsteroidSpawnBoundaryB.position.z);
+                    spawnVerticalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryC.position.z,
+                        AsteroidSpawnBoundaryB.position.z);
                     spawnHorizontalPosition = AsteroidSpawnBoundaryB.position.x;
                     break;
                 case 2: // along CD
                     spawnVerticalPosition = AsteroidSpawnBoundaryC.position.z;
-                    spawnHorizontalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryD.position.x, AsteroidSpawnBoundaryC.position.x);
+                    spawnHorizontalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryD.position.x,
+                        AsteroidSpawnBoundaryC.position.x);
                     break;
                 case 3: // along DA
-                    spawnVerticalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryD.position.z, AsteroidSpawnBoundaryA.position.z);
+                    spawnVerticalPosition = UnityEngine.Random.Range(AsteroidSpawnBoundaryD.position.z,
+                        AsteroidSpawnBoundaryA.position.z);
                     spawnHorizontalPosition = AsteroidSpawnBoundaryD.position.x;
                     break;
                 default:
@@ -64,8 +69,16 @@ public class AsteroidSpawner : MonoBehaviour {
                     break;
             }
 
-            var asteroid = (GameObject)Instantiate(PrefabReference.Asteroid, new Vector3(spawnHorizontalPosition, SceneReference.PlayerSpawner.PlayerSpawnPoint.position.y, spawnVerticalPosition), Quaternion.identity);
+            var asteroid =
+                (GameObject)
+                    Instantiate(PrefabReference.Asteroid,
+                        new Vector3(spawnHorizontalPosition, SceneReference.PlayerSpawner.PlayerSpawnPoint.position.y,
+                            spawnVerticalPosition), Quaternion.identity);
             PropelForward(asteroid);
+        }
+        else
+        {
+            CancelInvoke("Spawn");
         }
     }
 
