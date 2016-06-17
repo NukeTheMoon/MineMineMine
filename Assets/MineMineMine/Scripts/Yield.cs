@@ -44,7 +44,7 @@ public class Yield : MonoBehaviour {
 
     private void Update()
     {
-        if (_explosion.isPlaying)
+        if (_explosion != null && _explosion.isPlaying)
         {
             _explosionLightInterpolator += Time.deltaTime/_explosion.startLifetime;
             _explosionLight.range = Mathf.Lerp(0, ExplosionLightStrength, _explosionLightInterpolator);
