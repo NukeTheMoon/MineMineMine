@@ -7,11 +7,14 @@ public class Yield : MonoBehaviour {
 
     public float Speed;
     public float DistanceToStop;
+    public float ExplosionLightStrength;
 
     private static Transform _target;
     private Rigidbody _rigidbody;
     private Trail _trail;
     private ParticleSystem _explosion;
+    private Light _explosionLight;
+    private float _explosionLightInterpolator;
     private bool _approaching;
 
     private void Start()
@@ -20,6 +23,8 @@ public class Yield : MonoBehaviour {
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<Trail>();
         _explosion = transform.GetChild(1).GetComponent<ParticleSystem>();
+        _explosionLight = GetComponent<Light>();
+        _explosionLightInterpolator = 0;
         _approaching = true;
         SceneReference.PlayerSpawner.OnCentralPlayerChanged += PlayerSpawner_OnCentralPlayerChanged;
     }
@@ -39,7 +44,12 @@ public class Yield : MonoBehaviour {
 
     private void Update()
     {
-
+        if (_explosion.isPlaying)
+        {
+            _explosionLightInterpolator += Time.deltaTime/_explosion.startLifetime;
+            _explosionLight.range = Mathf.Lerp(0, ExplosionLightStrength, _explosionLightInterpolator);
+            _explosionLight.intensity = Mathf.Lerp(ExplosionLightStrength, 0, _explosionLightInterpolator);
+        }
     }
 
     private void FixedUpdate()
