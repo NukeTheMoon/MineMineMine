@@ -11,6 +11,7 @@ public class Yield : MonoBehaviour {
     private static Transform _target;
     private Rigidbody _rigidbody;
     private Trail _trail;
+    private ParticleSystem _explosion;
     private bool _approaching;
 
     private void Start()
@@ -18,6 +19,7 @@ public class Yield : MonoBehaviour {
         UpdateTarget();
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<Trail>();
+        _explosion = transform.GetChild(1).GetComponent<ParticleSystem>();
         _approaching = true;
         SceneReference.PlayerSpawner.OnCentralPlayerChanged += PlayerSpawner_OnCentralPlayerChanged;
     }
@@ -58,10 +60,11 @@ public class Yield : MonoBehaviour {
 
     private void PlayerHit()
     {
-        var meshObject = transform.GetChild(0).gameObject;
+        GameObject meshObject = transform.GetChild(0).gameObject;
 
         _approaching = false;
         _rigidbody.isKinematic = true;
+        _explosion.Play();
         SceneReference.ScoreKeeper.AsteroidHit();
         Destroy(meshObject);
         StartCoroutine(DestroyAfterTrailLifetime());
@@ -90,18 +93,8 @@ public class Yield : MonoBehaviour {
 
     private void ApproachTarget()
     {
-        var direction = Vector3.zero;
         transform.LookAt(_target);
         _rigidbody.AddRelativeForce(Vector3.forward * Speed * Time.deltaTime, ForceMode.Force);
     }
-
-    private void StopForces()
-    {
-        _rigidbody.drag = 1000f;
-    }
-
-    private bool OutsideStoppingDistanceFromTarget()
-    {
-        return Vector3.Distance(transform.position, _target.position) > DistanceToStop;
-    }
+   
 }
