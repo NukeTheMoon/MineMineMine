@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using PigeonCoopToolkit.Effects.Trails;
 
 public class Yield : MonoBehaviour {
 
@@ -9,11 +10,15 @@ public class Yield : MonoBehaviour {
 
     private static Transform _target;
     private Rigidbody _rigidbody;
+    private Trail _trail;
+    private bool _approaching;
 
     private void Start()
     {
         UpdateTarget();
         _rigidbody = GetComponent<Rigidbody>();
+        _trail = GetComponent<Trail>();
+        _approaching = true;
         SceneReference.PlayerSpawner.OnCentralPlayerChanged += PlayerSpawner_OnCentralPlayerChanged;
     }
 
@@ -37,7 +42,7 @@ public class Yield : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (_rigidbody != null)
+        if (_rigidbody != null && _approaching)
         {
             ApproachTarget();
         }
@@ -47,9 +52,25 @@ public class Yield : MonoBehaviour {
     {
         if (other.gameObject.tag == TagsReference.PLAYER)
         {
-            SceneReference.ScoreKeeper.AsteroidHit();
-            Destroy(gameObject);
+            PlayerHit();
         }
+    }
+
+    private void PlayerHit()
+    {
+        var meshObject = transform.GetChild(0).gameObject;
+
+        _approaching = false;
+        _rigidbody.isKinematic = true;
+        SceneReference.ScoreKeeper.AsteroidHit();
+        Destroy(meshObject);
+        StartCoroutine(DestroyAfterTrailLifetime());
+    }
+
+    private IEnumerator DestroyAfterTrailLifetime()
+    {
+        yield return new WaitForSeconds(_trail.TrailData.Lifetime);
+        Destroy(gameObject);
     }
 
     private void LimitSpeed()
