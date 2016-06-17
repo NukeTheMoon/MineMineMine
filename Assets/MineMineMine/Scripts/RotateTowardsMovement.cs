@@ -13,6 +13,9 @@ public class RotateTowardsMovement : MonoBehaviour
 
 	private void Update()
 	{
-		transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+		if (_rigidbody.velocity != Vector3.zero)
+		{
+			transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+		}
 	}
 }
