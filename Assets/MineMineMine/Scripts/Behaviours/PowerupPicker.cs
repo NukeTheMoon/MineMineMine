@@ -84,7 +84,7 @@ public class PowerupPicker : MonoBehaviour
 
 	private void ScattershotBoostPickupEffect()
 	{
-		SceneReference.WeaponManager.ScattershotExpansion += SceneReference.PowerupManager.ScattershotBoostExpansionIncrease;
+		SceneReference.WeaponManager.ScattershotTargetWidth += SceneReference.PowerupManager.ScattershotBoostExpansionIncrease;
 	}
 
 	private void RailgunBoostPickupEffect()

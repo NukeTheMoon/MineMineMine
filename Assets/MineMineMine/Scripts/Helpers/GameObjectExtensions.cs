@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace ReptilianCabal.MineMineMine
 {
-	public static class GameObjectExtensions
-	{
-		public static IEnumerator DestroyAfterTime(this GameObject target, float time)
-		{
-			yield return new WaitForSeconds(time);
-			Object.Destroy(target);
-		}
-	}
+    public static class GameObjectExtensions
+    {
+        public static IEnumerator DestroyAfterSeconds(this GameObject target, float time)
+        {
+            yield return new WaitForSeconds(time);
+            Object.Destroy(target);
+        }
+    }
 }

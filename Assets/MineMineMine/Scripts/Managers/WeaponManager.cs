@@ -17,7 +17,7 @@ public class WeaponManager : MonoBehaviour
 	private bool _pulseCooldown;
 
 	public int ScattershotLifeMs;
-	public int ScattershotExpansion;
+	public int ScattershotTargetWidth;
 	public int ScattershotCooldownMs;
 	public float ScattershotForce = 10000.0f;
 	public float ScattershotDrag = 1;
@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour
 	public int ScattershotInitialAmmo;
 	private int _scattershotAmmo;
 	private bool _scattershotCooldown;
-	private int _initialScattershotExpansion;
+	private int _initialScattershotWidth;
 
 	public int RailgunLifeMs = 20;
 	public int RailgunCooldownMs;
@@ -51,7 +51,7 @@ public class WeaponManager : MonoBehaviour
 
 	private void Start()
 	{
-		_initialScattershotExpansion = ScattershotExpansion;
+		_initialScattershotWidth = ScattershotTargetWidth;
 		_initialRailgunCooldownMs = RailgunCooldownMs;
 		_initialRailgunLifeMs = RailgunLifeMs;
 		ResetWeapon();
@@ -91,7 +91,7 @@ public class WeaponManager : MonoBehaviour
 	public void ResetWeapon()
 	{
 		ChangeWeapon(InitialWeapon);
-		ScattershotExpansion = _initialScattershotExpansion;
+		ScattershotTargetWidth = _initialScattershotWidth;
 		RailgunCooldownMs = _initialRailgunCooldownMs;
 		RailgunLifeMs = _initialRailgunLifeMs;
 		_pulseAmmo = PulseInitialAmmo;
