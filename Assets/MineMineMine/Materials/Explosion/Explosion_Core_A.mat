@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AsteroidExplosion
+  m_Name: Explosion_Core_A
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 7646e7afde8cb024598e8e40fedb20f4, type: 3}
+          m_Texture: {fileID: 2800000, guid: 6d1e33156641cc34fb16360a1257f50a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -143,4 +143,4 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: 0.9558824, g: 0.098884396, b: 0, a: 0.234}
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
