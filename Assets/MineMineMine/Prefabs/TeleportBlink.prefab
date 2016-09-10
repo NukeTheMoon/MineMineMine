@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 433364}
   - 198: {fileID: 19843180}
   - 199: {fileID: 19999360}
+  - 114: {fileID: 11458412}
   m_Layer: 0
   m_Name: TeleportBlink
   m_TagString: Untagged
@@ -89,6 +90,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 433364}
   m_RootOrder: 1
+--- !u!114 &11458412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f380cfbde715a7546b203181613d12f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &19811606
 ParticleSystem:
   m_ObjectHideFlags: 1

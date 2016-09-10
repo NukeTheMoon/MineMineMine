@@ -166,8 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c19232bc365eb4ca8cdda070ce1568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 7
-  AngularSpeed: 0.5
+  Speed: 5
+  AngularSpeed: 0.25
+  Boost: 1
+  RecentlyPressedThrust: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
