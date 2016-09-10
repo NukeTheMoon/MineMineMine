@@ -453,6 +453,7 @@ MonoBehaviour:
   _nuke: {fileID: 158736, guid: 0052ecafdb0294c4c8ff81bc743b1e78, type: 2}
   _explosionMedium: {fileID: 138462, guid: ea8d5aaeae3777b42a950375802a91c9, type: 2}
   _explosionSmall: {fileID: 173594, guid: e133db43d88f4084a99f683de648151e, type: 2}
+  _teleportBlink: {fileID: 112674, guid: 3a0eb36bebea8c34bb11c29698b925f0, type: 2}
 --- !u!114 &521822250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +504,7 @@ MonoBehaviour:
   ScattershotLifeMs: 100
   ScattershotTargetWidth: 8
   ScattershotCooldownMs: 300
-  ScattershotForce: 5000
+  ScattershotForce: 6000
   ScattershotDrag: 15
   ScattershotPunchthrough: 1
   ScattershotInitialAmmo: 10
