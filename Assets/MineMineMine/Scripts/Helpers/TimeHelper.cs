@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TimeHelper : MonoBehaviour {
+public class TimeHelper : MonoBehaviour
+{
 
     public static float SecondsToMilliseconds(float seconds)
     {
@@ -13,4 +14,9 @@ public class TimeHelper : MonoBehaviour {
         return (float)milliseconds / 1000.0f;
     }
 
+    public static bool WithinDoubleTapTimeWindow(float firstTapTimeMs, float timeWindowMs)
+    {
+        float currentTimeMs = SecondsToMilliseconds(Time.time);
+        return currentTimeMs <= firstTapTimeMs + timeWindowMs;
+    }
 }
