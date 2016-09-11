@@ -83,7 +83,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForShoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             return true;
         }

@@ -9,10 +9,10 @@ public class MeterManager : MonoBehaviour
 {
     public float MaximumMeter = 100;
     public float RegeneratePerSecond = 20;
-    public float PulseCost = 15;
-    public float ScattershotCost = 40;
-    public float RailgunCost = 80;
-    public float ShieldCostPerSecond = 30; // += RegeneratePerSecond, make a Get() for this?
+    public float PulseCost = 7;
+    public float ScattershotCost = 30;
+    public float RailgunCost = 75;
+    public float ShieldCostPerSecond = 100;
     public float BoostCost = 30;
     private float _currentMeter;
     private Text _debugText;

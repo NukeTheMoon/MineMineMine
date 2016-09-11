@@ -500,19 +500,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialWeapon: 0
   PulseForce: 1000
-  PulseCooldownMs: 50
+  PulseCooldownMs: 100
   PulseDrag: 0
   PulsePunchthrough: 0
   PulseInitialAmmo: -1
   ScattershotLifeMs: 100
   ScattershotTargetWidth: 8
-  ScattershotCooldownMs: 50
+  ScattershotCooldownMs: 200
   ScattershotForce: 6000
   ScattershotDrag: 15
   ScattershotPunchthrough: 1
   ScattershotInitialAmmo: -1
   RailgunLifeMs: 150
-  RailgunCooldownMs: 50
+  RailgunCooldownMs: 200
   RailgunPunchthrough: 1
   RailgunInitialAmmo: -1
   NukeLifeMs: 350
@@ -562,8 +562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaximumMeter: 100
   RegeneratePerSecond: 20
-  PulseCost: 10
-  ScattershotCost: 40
+  PulseCost: 7
+  ScattershotCost: 30
   RailgunCost: 75
   ShieldCostPerSecond: 100
   BoostCost: 30
