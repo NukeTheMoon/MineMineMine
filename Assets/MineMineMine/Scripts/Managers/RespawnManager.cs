@@ -15,12 +15,9 @@ namespace Assets.MineMineMine.Scripts.Managers
         public float RepulsionForce;
 
         public bool Respawning { get; private set; }
-        public bool Invulnerability { get; private set; }
-        public event EventHandler OnInvulnerabilityStart = delegate { };
-        public event EventHandler OnInvulnerabilityEnd = delegate { };
+        public bool RespawnGracePeriod { get; private set; }
 
         private GameObject _reticle;
-        private List<GameObject> _protectionRings;
 
         private void Awake()
         {
@@ -30,7 +27,12 @@ namespace Assets.MineMineMine.Scripts.Managers
         private void Start()
         {
             Respawning = false;
-            _protectionRings = new List<GameObject>();
+            SceneReference.ShieldManager.OnInvulnerabilityEnd += ShieldManager_OnInvulnerabilityEnd;
+        }
+
+        private void ShieldManager_OnInvulnerabilityEnd(object sender, EventArgs e)
+        {
+            RespawnGracePeriod = false;
         }
 
         private void Update()
@@ -41,52 +43,10 @@ namespace Assets.MineMineMine.Scripts.Managers
                 Destroy(_reticle);
                 SceneReference.LifeManager.DecreaseLifeCount();
                 SceneReference.WeaponManager.StartGlobalCooldown(RespawnWeaponCooldownMs);
-                StartInvulnerability();
+                SceneReference.ShieldManager.StartInvulnerabilityTimed(RespawnInvulnerabilityMs);
+                RespawnGracePeriod = true;
                 Respawning = false;
             }
-        }
-
-        public void StartInvulnerability()
-        {
-            Invulnerability = true;
-            OnInvulnerabilityStart(this, null);
-            StartCoroutine(InvulnerabilityCoroutine());
-            CreateProtectionRings();
-        }
-
-        private void CreateProtectionRings()
-        {
-            foreach (var player in SceneReference.PlayerSpawnManager.GetAllPlayers())
-            {
-                var protectionRing =
-                    (GameObject)
-                        Instantiate(PrefabReference.ProtectionRing,
-                            player.transform.position, Quaternion.identity);
-                protectionRing.transform.parent = player.transform;
-                _protectionRings.Add(protectionRing);
-            }
-        }
-
-        private IEnumerator InvulnerabilityCoroutine()
-        {
-            yield return new WaitForSeconds(TimeHelper.MillisecondsToSeconds(RespawnInvulnerabilityMs));
-            StopInvulnerability();
-        }
-
-        private void StopInvulnerability()
-        {
-            Invulnerability = false;
-            DestroyProtectionRings();
-            OnInvulnerabilityEnd(this, null);
-        }
-
-        private void DestroyProtectionRings()
-        {
-            for (var i = 0; i < _protectionRings.Count; ++i)
-            {
-                Destroy(_protectionRings[i]);
-            }
-            _protectionRings = new List<GameObject>();
         }
 
         private void RegisterWithSceneReference()

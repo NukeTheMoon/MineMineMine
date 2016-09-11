@@ -247,7 +247,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.5, y: -322.36}
+  m_AnchoredPosition: {x: 12.5, y: -329.1}
   m_SizeDelta: {x: -25, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449645854
@@ -310,6 +310,8 @@ GameObject:
   - 114: {fileID: 521822251}
   - 114: {fileID: 521822253}
   - 114: {fileID: 521822254}
+  - 114: {fileID: 521822255}
+  - 114: {fileID: 521822256}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Logic
@@ -477,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropChance: 0.1
+  PowerupsEnabled: 0
   CooldownDurationSeconds: 5
   ScattershotAddAmmoAmount: 10
   RailgunAddAmmoAmount: 4
@@ -497,21 +500,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialWeapon: 0
   PulseForce: 1000
-  PulseCooldownMs: 20
+  PulseCooldownMs: 50
   PulseDrag: 0
   PulsePunchthrough: 0
   PulseInitialAmmo: -1
   ScattershotLifeMs: 100
   ScattershotTargetWidth: 8
-  ScattershotCooldownMs: 300
+  ScattershotCooldownMs: 50
   ScattershotForce: 6000
   ScattershotDrag: 15
   ScattershotPunchthrough: 1
-  ScattershotInitialAmmo: 10
+  ScattershotInitialAmmo: -1
   RailgunLifeMs: 150
-  RailgunCooldownMs: 1000
+  RailgunCooldownMs: 50
   RailgunPunchthrough: 1
-  RailgunInitialAmmo: 5
+  RailgunInitialAmmo: -1
   NukeLifeMs: 350
   NukeExpansion: 3
   ShieldInitialAmmo: 1
@@ -546,6 +549,35 @@ MonoBehaviour:
   WaveOfMaximumAsteroidAmount: 15
   WaveOfMaximumAsteroidDivisions: 25
   DebugText: {fileID: 449645854}
+--- !u!114 &521822255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521822240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0afc352299beba46a543a8a288e5e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaximumMeter: 100
+  RegeneratePerSecond: 20
+  PulseCost: 10
+  ScattershotCost: 40
+  RailgunCost: 75
+  ShieldCostPerSecond: 100
+  BoostCost: 30
+--- !u!114 &521822256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521822240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3661dc182a8dc24281e29de154baabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &556900823
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +605,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1044550944}
   m_RootOrder: 2
+--- !u!1 &577343013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 577343014}
+  - 222: {fileID: 577343016}
+  - 114: {fileID: 577343015}
+  m_Layer: 5
+  m_Name: MeterDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &577343014
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577343013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1394036364}
+  m_RootOrder: 4
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 12.499939, y: -371.4}
+  m_SizeDelta: {x: -25, y: 180}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &577343015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577343013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Meter: '
+--- !u!222 &577343016
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577343013}
 --- !u!1 &579141146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1297,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1394036364}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -300, y: -300}
@@ -1352,6 +1457,7 @@ RectTransform:
   - {fileID: 993549278}
   - {fileID: 1007611427}
   - {fileID: 449645853}
+  - {fileID: 577343014}
   - {fileID: 1065501690}
   m_Father: {fileID: 0}
   m_RootOrder: 3

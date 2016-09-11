@@ -2,7 +2,6 @@
 {
     PulseEmitter = 0,
     Scattershot = 1,
-    Railgun = 2,
-    Shield = 3
+    Railgun = 2
 }
 

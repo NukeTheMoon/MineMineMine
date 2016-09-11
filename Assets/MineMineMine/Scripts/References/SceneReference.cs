@@ -2,7 +2,8 @@
 using System.Collections;
 using Assets.MineMineMine.Scripts.Managers;
 
-public class SceneReference : MonoBehaviour {
+public class SceneReference : MonoBehaviour
+{
 
     public static PlayerSpawnManager PlayerSpawnManager
     {
@@ -94,6 +95,25 @@ public class SceneReference : MonoBehaviour {
         }
     }
 
+    public static MeterManager MeterManager
+    {
+        get { return _meterManager; }
+        set
+        {
+            if (_meterManager == null) _meterManager = value;
+        }
+    }
+
+    public static ShieldManager ShieldManager
+    {
+        get { return _shieldManager; }
+        set
+        {
+            if (_shieldManager == null)
+                _shieldManager = value;
+        }
+    }
+
     private static PlayerSpawnManager _playerSpawnManager;
     private static MissileSpawnManager _missileSpawnManager;
     private static AsteroidSpawnManager _asteroidSpawnManager;
@@ -104,4 +124,6 @@ public class SceneReference : MonoBehaviour {
     private static PowerupManager _powerupManager;
     private static WeaponManager _weaponManager;
     private static RespawnManager _respawnManager;
+    private static MeterManager _meterManager;
+    private static ShieldManager _shieldManager;
 }

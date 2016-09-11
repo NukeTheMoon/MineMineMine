@@ -14,6 +14,11 @@ public class TimeHelper : MonoBehaviour
         return (float)milliseconds / 1000.0f;
     }
 
+    public static float MillisecondsToSeconds(float milliseconds)
+    {
+        return milliseconds / 1000.0f;
+    }
+
     public static bool WithinDoubleTapTimeWindow(float firstTapTimeMs, float timeWindowMs)
     {
         float currentTimeMs = SecondsToMilliseconds(Time.time);

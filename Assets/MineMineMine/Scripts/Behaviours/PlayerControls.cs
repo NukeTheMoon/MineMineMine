@@ -29,7 +29,22 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        CheckForThrustDoubleTap();
+        if (CheckForShoot())
+        {
+            SceneReference.MissileSpawnManager.Shoot();
+        };
+        if (CheckForThrustDoubleTap())
+        {
+            Boost();
+        }
+        if (CheckForShieldPress())
+        {
+            ActivateShield();
+        }
+        if (CheckForShieldRelease())
+        {
+            DeactivateShield();
+        }
         _debugText.text =
             "W = " + Input.GetKey(KeyCode.W) +
             "\n_firstThrustTapped = " + _firstThrustTapped +
@@ -38,7 +53,44 @@ public class PlayerControls : MonoBehaviour
             "\nTimeWindow = " + TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, DoubleTapTimeWindowMs);
     }
 
-    private void CheckForThrustDoubleTap()
+    private void DeactivateShield()
+    {
+        SceneReference.ShieldManager.StopInvulnerability();
+    }
+
+    private bool CheckForShieldRelease()
+    {
+        if (Input.GetKeyUp(KeyCode.LeftShift) && SceneReference.ShieldManager.Invulnerability)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void ActivateShield()
+    {
+        SceneReference.ShieldManager.StartInvulnerability();
+    }
+
+    private bool CheckForShieldPress()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !SceneReference.ShieldManager.Invulnerability)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CheckForShoot()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CheckForThrustDoubleTap()
     {
         if (!TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, DoubleTapTimeWindowMs))
         {
@@ -47,12 +99,10 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (_thrustReleased && !_boosted && _firstThrustTapped)
+            if (CanBoost())
             {
-                Boost();
                 _boosted = true;
-                //_firstThrustTapped = false;
-                //_thrustReleased = false;
+                return true;
             }
             else
             {
@@ -71,14 +121,19 @@ public class PlayerControls : MonoBehaviour
                 _thrustReleased = true;
             }
         }
+        return false;
     }
 
+    private bool CanBoost()
+    {
+        return _thrustReleased && !_boosted && _firstThrustTapped && SceneReference.MeterManager.HaveEnoughMeter(MeterAction.Boost);
+    }
 
 
     private void Boost()
     {
-        Debug.Log("Boost! " + TimeHelper.SecondsToMilliseconds(Time.time));
         _rigidbody.AddForce(transform.forward * BoostForce);
+        SceneReference.MeterManager.ExpendMeter(MeterAction.Boost);
     }
 
 

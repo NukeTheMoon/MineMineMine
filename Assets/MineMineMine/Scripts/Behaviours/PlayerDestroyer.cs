@@ -2,11 +2,12 @@
 using System.Collections;
 using Assets.MineMineMine.Scripts.Managers;
 
-public class PlayerDestroyer : MonoBehaviour {
+public class PlayerDestroyer : MonoBehaviour
+{
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == PlayerSpawnManager.CENTRAL_PLAYER && !SceneReference.RespawnManager.Invulnerability)
+        if (other.gameObject.name == PlayerSpawnManager.CENTRAL_PLAYER && !SceneReference.ShieldManager.Invulnerability)
         {
             SceneReference.PlayerSpawnManager.SetLastKnownPlayerPosition(other.gameObject.transform);
             foreach (var player in GameObject.FindGameObjectsWithTag(TagsReference.PLAYER))
