@@ -62,15 +62,15 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (SceneReference.InputMappingManager.GetSelectPulse())
         {
             ChangeWeapon(Weapon.PulseEmitter);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (SceneReference.InputMappingManager.GetSelectScattershot())
         {
             ChangeWeapon(Weapon.Scattershot);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (SceneReference.InputMappingManager.GetSelectRailgun())
         {
             ChangeWeapon(Weapon.Railgun);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using TeamUtility.IO;
 using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
@@ -46,7 +47,7 @@ public class PlayerControls : MonoBehaviour
             DeactivateShield();
         }
         _debugText.text =
-            "W = " + Input.GetKey(KeyCode.W) +
+            "Right trigger = " + InputManager.GetAxis("Right Trigger") +
             "\n_firstThrustTapped = " + _firstThrustTapped +
             "\n_thrustReleased = " + _thrustReleased +
             "\n_boosted = " + _boosted +
@@ -60,7 +61,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForShieldRelease()
     {
-        if (Input.GetKeyUp(KeyCode.LeftShift) && SceneReference.ShieldManager.Invulnerability)
+        if (SceneReference.InputMappingManager.GetShieldRelease() && SceneReference.ShieldManager.Invulnerability)
         {
             return true;
         }
@@ -74,7 +75,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForShieldPress()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !SceneReference.ShieldManager.Invulnerability)
+        if (SceneReference.InputMappingManager.GetShield() && !SceneReference.ShieldManager.Invulnerability)
         {
             return true;
         }
@@ -83,7 +84,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForShoot()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (SceneReference.InputMappingManager.GetShoot())
         {
             return true;
         }
@@ -97,7 +98,7 @@ public class PlayerControls : MonoBehaviour
             _firstThrustTapped = false;
             _thrustReleased = false;
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (SceneReference.InputMappingManager.GetThrust() > 0)
         {
             if (CanBoost())
             {
@@ -139,7 +140,22 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.AddForce(transform.forward * Input.GetAxis("Vertical") * Speed);
-        _rigidbody.AddTorque(transform.up * Input.GetAxis("Horizontal") * AngularSpeed);
+        Thrust();
+        Turn();
+
+    }
+
+    private void Thrust()
+    {
+        float thrustForce = SceneReference.InputMappingManager.GetThrust() -
+                            SceneReference.InputMappingManager.GetReverse();
+        _rigidbody.AddForce(transform.forward * thrustForce * Speed);
+    }
+
+    private void Turn()
+    {
+        float turnForce = SceneReference.InputMappingManager.GetTurnRight() -
+                          SceneReference.InputMappingManager.GetTurnLeft();
+        _rigidbody.AddTorque(transform.up * turnForce * AngularSpeed);
     }
 }

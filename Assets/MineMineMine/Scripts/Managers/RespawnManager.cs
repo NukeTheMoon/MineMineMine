@@ -35,18 +35,15 @@ namespace Assets.MineMineMine.Scripts.Managers
             RespawnGracePeriod = false;
         }
 
-        private void Update()
+        public void Respawn()
         {
-            if (_reticle != null && Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneReference.PlayerSpawnManager.Spawn(_reticle.transform);
-                Destroy(_reticle);
-                SceneReference.LifeManager.DecreaseLifeCount();
-                SceneReference.WeaponManager.StartGlobalCooldown(RespawnWeaponCooldownMs);
-                SceneReference.ShieldManager.StartInvulnerabilityTimed(RespawnInvulnerabilityMs);
-                RespawnGracePeriod = true;
-                Respawning = false;
-            }
+            SceneReference.PlayerSpawnManager.Spawn(_reticle.transform);
+            Destroy(_reticle);
+            SceneReference.LifeManager.DecreaseLifeCount();
+            SceneReference.WeaponManager.StartGlobalCooldown(RespawnWeaponCooldownMs);
+            SceneReference.ShieldManager.StartInvulnerabilityTimed(RespawnInvulnerabilityMs);
+            RespawnGracePeriod = true;
+            Respawning = false;
         }
 
         private void RegisterWithSceneReference()

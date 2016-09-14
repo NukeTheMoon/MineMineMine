@@ -169,7 +169,7 @@ MonoBehaviour:
   Speed: 5
   AngularSpeed: 0.25
   BoostMultiplier: 2
-  DoubleTapTimeWindowMs: 500
+  DoubleTapTimeWindowMs: 100
   BoostForce: 250
 --- !u!1001 &100100000
 Prefab:

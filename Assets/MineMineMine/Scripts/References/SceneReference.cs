@@ -114,6 +114,16 @@ public class SceneReference : MonoBehaviour
         }
     }
 
+    public static InputMappingManager InputMappingManager
+    {
+        get { return _inputMappingManager; }
+        set
+        {
+            if (_inputMappingManager == null)
+                _inputMappingManager = value;
+        }
+    }
+
     private static PlayerSpawnManager _playerSpawnManager;
     private static MissileSpawnManager _missileSpawnManager;
     private static AsteroidSpawnManager _asteroidSpawnManager;
@@ -126,4 +136,5 @@ public class SceneReference : MonoBehaviour
     private static RespawnManager _respawnManager;
     private static MeterManager _meterManager;
     private static ShieldManager _shieldManager;
+    private static InputMappingManager _inputMappingManager;
 }
