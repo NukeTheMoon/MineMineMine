@@ -24,6 +24,11 @@ namespace Assets.MineMineMine.Scripts.Managers
             RegisterWithSceneReference();
         }
 
+        private void RegisterWithSceneReference()
+        {
+            SceneReference.RespawnManager = this;
+        }
+
         private void Start()
         {
             Respawning = false;
@@ -46,11 +51,6 @@ namespace Assets.MineMineMine.Scripts.Managers
             Respawning = false;
         }
 
-        private void RegisterWithSceneReference()
-        {
-            SceneReference.RespawnManager = this;
-        }
-
         public void ShowReticle()
         {
             if (_reticle == null)
@@ -59,21 +59,6 @@ namespace Assets.MineMineMine.Scripts.Managers
                 _reticle =
                     (GameObject)
                         Instantiate(PrefabReference.Reticle, ReticleSpawnPoint.position, ReticleSpawnPoint.rotation);
-            }
-        }
-
-        private void Repulse(Vector3 explosionPosition)
-        {
-            var colliders = Physics.OverlapSphere(explosionPosition, RepulsionRadius);
-            for (var i = 0; i < colliders.Length; ++i)
-            {
-                if (colliders[i].gameObject.tag == TagsReference.ASTEROID)
-                {
-                    var rigidbody = colliders[i].GetComponent<Rigidbody>();
-                    if (rigidbody != null)
-                        rigidbody.AddExplosionForce(RepulsionForce, explosionPosition, RepulsionForce, 0.0f);
-                }
-
             }
         }
     }

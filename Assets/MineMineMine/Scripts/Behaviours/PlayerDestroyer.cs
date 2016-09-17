@@ -10,7 +10,7 @@ public class PlayerDestroyer : MonoBehaviour
         if (other.gameObject.name == PlayerSpawnManager.CENTRAL_PLAYER && !SceneReference.ShieldManager.Invulnerability)
         {
             SceneReference.PlayerSpawnManager.SetLastKnownPlayerPosition(other.gameObject.transform);
-            foreach (var player in GameObject.FindGameObjectsWithTag(TagsReference.PLAYER))
+            foreach (GameObject player in GameObject.FindGameObjectsWithTag(TagsReference.PLAYER))
             {
                 Destroy(player);
             }

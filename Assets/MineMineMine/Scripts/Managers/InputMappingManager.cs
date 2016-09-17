@@ -18,10 +18,18 @@ public class InputMappingManager : MonoBehaviour
     private float _dpadHorizontalDeadzone;
     private float _dpadVerticalDeadzone;
 
+    private void Awake()
+    {
+        RegisterWithSceneReference();
+    }
+
+    private void RegisterWithSceneReference()
+    {
+        SceneReference.InputMappingManager = this;
+    }
 
     private void Start()
     {
-        RegisterWithSceneReference();
         CurrentScheme = InputScheme.Keyboard;
         _rightTriggerDeadzone =
             InputManager.PlayerOneConfiguration.axes.First(item => item.name == "Right Trigger").deadZone;
@@ -39,11 +47,6 @@ public class InputMappingManager : MonoBehaviour
             InputManager.PlayerOneConfiguration.axes.First(item => item.name == "DPAD Horizontal").deadZone;
         _dpadVerticalDeadzone =
             InputManager.PlayerOneConfiguration.axes.First(item => item.name == "DPAD Vertical").deadZone;
-    }
-
-    private void RegisterWithSceneReference()
-    {
-        SceneReference.InputMappingManager = this;
     }
 
     private void Update()

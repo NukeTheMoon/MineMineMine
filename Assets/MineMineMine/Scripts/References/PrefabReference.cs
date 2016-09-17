@@ -31,6 +31,8 @@ public class PrefabReference : MonoBehaviour
     private GameObject _explosionSmall;
     [SerializeField]
     private GameObject _teleportBlink;
+    [SerializeField]
+    private GameObject _shield;
 
     public static GameObject Player;
     public static GameObject PulseMissile;
@@ -46,6 +48,7 @@ public class PrefabReference : MonoBehaviour
     public static GameObject ExplosionMedium;
     public static GameObject ExplosionSmall;
     public static GameObject TeleportBlink;
+    public static GameObject Shield;
 
     private void Awake()
     {
@@ -63,6 +66,7 @@ public class PrefabReference : MonoBehaviour
         ExplosionMedium = _explosionMedium;
         ExplosionSmall = _explosionSmall;
         TeleportBlink = _teleportBlink;
+        Shield = _shield;
     }
 
 }

@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebc1ec05d29e0b43b5b30c913cf46e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 144774, guid: d4764cf30cf56a642968c02b982652d3, type: 2}
+  _player: {fileID: 107452, guid: 904d4ac82246f3143ba63b00d8769a20, type: 2}
   _pulseMissile: {fileID: 155300, guid: 82b5c6fe9a6abe44cb874becca180d4d, type: 2}
   _scattershotMissile: {fileID: 190430, guid: c8164f44b84a3f842a9de791606a962c, type: 2}
   _railgunMissile: {fileID: 134142, guid: fb87cabd58803b446bc76545a81b7937, type: 2}
@@ -457,6 +457,7 @@ MonoBehaviour:
   _explosionMedium: {fileID: 138462, guid: ea8d5aaeae3777b42a950375802a91c9, type: 2}
   _explosionSmall: {fileID: 173594, guid: e133db43d88f4084a99f683de648151e, type: 2}
   _teleportBlink: {fileID: 112674, guid: 3a0eb36bebea8c34bb11c29698b925f0, type: 2}
+  _shield: {fileID: 174956, guid: f582873a71286254ca1f9580b0a3058b, type: 2}
 --- !u!114 &521822250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,7 +567,7 @@ MonoBehaviour:
   PulseCost: 7
   ScattershotCost: 30
   RailgunCost: 75
-  ShieldCostPerSecond: 100
+  ShieldCostPerSecond: 0
   BoostCost: 30
 --- !u!114 &521822256
 MonoBehaviour:
