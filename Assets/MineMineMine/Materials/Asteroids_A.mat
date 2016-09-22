@@ -120,7 +120,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 0.162
       data:
         first:
           name: _BumpScale
@@ -144,7 +144,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 0.067
       data:
         first:
           name: _EmissionLM

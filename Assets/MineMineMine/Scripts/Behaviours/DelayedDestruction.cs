@@ -1,4 +1,6 @@
-﻿using PigeonCoopToolkit.Effects.Trails;
+﻿using System.Collections.Generic;
+using System.Linq;
+using PigeonCoopToolkit.Effects.Trails;
 using ReptilianCabal.MineMineMine;
 using UnityEngine;
 
@@ -15,7 +17,7 @@ public class DelayedDestruction : MonoBehaviour
         _weaponType = SceneReference.MissileSpawnManager.WeaponTypeOfMissileId[gameObject.GetInstanceID()];
     }
 
-    // InitiateDestruction() will be called instead of Destroy() by ShotManager in the event of a destructive collision when the 
+    // InitiateDestruction() should be called instead of Destroy() by ShotManager in the event of a destructive collision when the 
     // object has DelayedDestruction attached to it.
 
     public void InitiateDestruction()
@@ -40,13 +42,19 @@ public class DelayedDestruction : MonoBehaviour
 
         if (trail != null)
         {
-            CapsuleCollider _collider = GetComponent<CapsuleCollider>();
-            Rigidbody _rigidbody = GetComponent<Rigidbody>();
-            MeshRenderer _mesh = GetComponentInChildren<MeshRenderer>();
+            CapsuleCollider collider = GetComponent<CapsuleCollider>();
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
+            List<MeshRenderer> meshes = GetComponentsInChildren<MeshRenderer>().ToList();
 
-            if (_collider != null) _collider.enabled = false;
-            if (_rigidbody != null) _rigidbody.velocity = Vector3.zero;
-            if (_mesh != null) _mesh.enabled = false;
+            if (collider != null) collider.enabled = false;
+            if (rigidbody != null) rigidbody.velocity = Vector3.zero;
+            if (meshes.Count > 0)
+            {
+                for (var i = 0; i < meshes.Count; ++i)
+                {
+                    meshes[i].enabled = false;
+                }
+            }
 
             StartCoroutine(gameObject.DestroyAfterSeconds(trail.TrailData.Lifetime));
         }
@@ -62,11 +70,11 @@ public class DelayedDestruction : MonoBehaviour
 
         if (particleSystem != null)
         {
-            BoxCollider _collider = GetComponent<BoxCollider>();
-            Rigidbody _rigidbody = GetComponent<Rigidbody>();
+            BoxCollider collider = GetComponent<BoxCollider>();
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
 
-            if (_collider != null) _collider.enabled = false;
-            if (_rigidbody != null) _rigidbody.velocity = Vector3.zero;
+            if (collider != null) collider.enabled = false;
+            if (rigidbody != null) rigidbody.velocity = Vector3.zero;
 
             StartCoroutine(gameObject.DestroyAfterSeconds(particleSystem.subEmitters.birth0.duration));
         }
