@@ -1,13 +1,16 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Globalization;
 using System.Linq;
 using TeamUtility.IO;
+using UnityEngine.UI;
 
 public class InputMappingManager : MonoBehaviour
 {
 
     public InputScheme CurrentScheme { get; private set; }
+    public Text DebugText;
 
     private float _rightTriggerDeadzone;
     private float _leftTriggerDeadzone;
@@ -52,6 +55,7 @@ public class InputMappingManager : MonoBehaviour
     private void Update()
     {
         CheckForControllerChange();
+        DebugText.text = InputManager.GetAxis("Right Trigger").ToString("0.000");
     }
 
     private void CheckForControllerChange()

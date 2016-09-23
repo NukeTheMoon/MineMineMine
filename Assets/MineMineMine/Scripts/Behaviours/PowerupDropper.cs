@@ -30,6 +30,6 @@ public class PowerupDropper : MonoBehaviour
 
     private static bool DropCriteriaSatisfied(float diceRoll)
     {
-        return (SceneReference.ScorekeepingManager.Score == 0 || diceRoll <= SceneReference.PowerupManager.DropChance) && SceneReference.PowerupManager.PowerupsEnabled;
+        return (SceneReference.ScorekeepingManager.WaveScore == 0 || diceRoll <= SceneReference.PowerupManager.DropChance) && SceneReference.PowerupManager.PowerupsEnabled;
     }
 }
