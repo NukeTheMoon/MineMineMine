@@ -7,7 +7,6 @@ namespace Assets.MineMineMine.Scripts.Managers
     {
 
         public int StartingLives = 3;
-        public Text DebugTextField;
 
         public bool PlayerAlive { get; set; }
 
@@ -23,7 +22,6 @@ namespace Assets.MineMineMine.Scripts.Managers
         {
             PlayerAlive = true;
             _livesLeft = StartingLives;
-            UpdateDebugTextField();
         }
 
         private void RegisterWithSceneReference()
@@ -31,10 +29,6 @@ namespace Assets.MineMineMine.Scripts.Managers
             SceneReference.LifeManager = this;
         }
 
-        private void UpdateDebugTextField()
-        {
-            DebugTextField.text = "Emergency teleports left: " + _livesLeft;
-        }
 
         public bool NoLivesLeft()
         {
@@ -64,7 +58,6 @@ namespace Assets.MineMineMine.Scripts.Managers
         public void DecreaseLifeCount()
         {
             --_livesLeft;
-            UpdateDebugTextField();
         }
     }
 }

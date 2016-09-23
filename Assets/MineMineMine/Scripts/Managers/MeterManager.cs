@@ -15,7 +15,6 @@ public class MeterManager : MonoBehaviour
     public float ShieldCostPerSecond = 100;
     public float BoostCost = 30;
     private float _currentMeter;
-    private Text _debugText;
 
     [ExecuteInEditMode]
     void OnValidate()
@@ -41,13 +40,11 @@ public class MeterManager : MonoBehaviour
     private void Start()
     {
         _currentMeter = MaximumMeter;
-        _debugText = GameObject.Find("MeterDebug").GetComponent<Text>();
     }
 
     private void Update()
     {
         RegenerateMeter();
-        _debugText.text = "Meter: " + _currentMeter;
 
     }
 

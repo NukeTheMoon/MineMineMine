@@ -8,9 +8,10 @@ namespace Assets.MineMineMine.Scripts.Managers
     {
         public int WaveScore { get; private set; }
         public int TotalScore { get; private set; }
+        public int AsteroidHitValue = 10;
+        public int MaximumScoreTolerance;
 
         private int _maxScoreForWave;
-        private int _asteroidHitValue = 100;
 
         public event EventHandler OnMaxScoreReached;
         public event EventHandler ScoreChanged;
@@ -39,18 +40,18 @@ namespace Assets.MineMineMine.Scripts.Managers
             {
                 totalAsteroidFragments += (int)Math.Pow(SceneReference.AsteroidDivisionManager.Divisor, i);
             }
-            return SceneReference.AsteroidSpawnManager.MaxAsteroidCount * totalAsteroidFragments * _asteroidHitValue;
+            return SceneReference.AsteroidSpawnManager.MaxAsteroidCount * totalAsteroidFragments * AsteroidHitValue;
         }
 
         public void AsteroidHit()
         {
-            WaveScore += _asteroidHitValue;
-            TotalScore += _asteroidHitValue;
+            WaveScore += AsteroidHitValue;
+            TotalScore += AsteroidHitValue;
             if (ScoreChanged != null)
             {
                 ScoreChanged.Invoke(this, null);
             }
-            if (WaveScore >= _maxScoreForWave && OnMaxScoreReached != null)
+            if (WaveScore >= _maxScoreForWave - MaximumScoreTolerance && OnMaxScoreReached != null)
             {
                 OnMaxScoreReached.Invoke(this, null);
             }

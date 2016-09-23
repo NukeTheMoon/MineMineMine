@@ -45,8 +45,6 @@ public class WeaponManager : MonoBehaviour
     private int _shieldAmmo;
 
 
-    public Text DebugText;
-
     private void Awake()
     {
         RegisterWithSceneReference();
@@ -74,17 +72,9 @@ public class WeaponManager : MonoBehaviour
         {
             ChangeWeapon(Weapon.Railgun);
         }
-        UpdateDebugText();
 
     }
 
-    private void UpdateDebugText()
-    {
-        DebugText.text = "Pulse ammo: " + _pulseAmmo +
-                         "\nScattershot ammo: " + _scattershotAmmo +
-                         "\nRailgun ammo: " + _railgunAmmo +
-                         "\nShield ammo: " + _shieldAmmo;
-    }
 
     public void ResetWeapon()
     {

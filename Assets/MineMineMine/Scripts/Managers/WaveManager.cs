@@ -6,7 +6,6 @@ public class WaveManager : MonoBehaviour
 {
     public int WaveOfMaximumAsteroidAmount;
     public int WaveOfMaximumAsteroidDivisions;
-    public Text DebugText;
 
     private int _asteroidLimitPerWave;
     private int _waveNo;
@@ -24,10 +23,6 @@ public class WaveManager : MonoBehaviour
         StartNextWave();
     }
 
-    private void UpdateDebugText()
-    {
-        DebugText.text = "Wave: " + _waveNo;
-    }
 
     public void StartNextWave()
     {
@@ -35,17 +30,16 @@ public class WaveManager : MonoBehaviour
         SetDifficulty(_waveNo);
         SceneReference.ScorekeepingManager.Reset();
         SceneReference.AsteroidSpawnManager.StartSpawning();
-        UpdateDebugText();
     }
 
     private void SetDifficulty(int difficulty)
     {
-        SceneReference.AsteroidSpawnManager.MaxAsteroidCount = 
+        SceneReference.AsteroidSpawnManager.MaxAsteroidCount =
             (int)Mathf.Ceil(Mathf.Lerp(SceneReference.AsteroidSpawnManager.MinAsteroidCount,
                 _asteroidLimitPerWave, difficulty / (float)WaveOfMaximumAsteroidDivisions));
         SceneReference.AsteroidDivisionManager.Divisions =
             (int)Mathf.Ceil(Mathf.Lerp(SceneReference.AsteroidDivisionManager.MinimumDivisions,
-                SceneReference.AsteroidDivisionManager.MaximumDivisions, difficulty/(float)WaveOfMaximumAsteroidDivisions));
+                SceneReference.AsteroidDivisionManager.MaximumDivisions, difficulty / (float)WaveOfMaximumAsteroidDivisions));
     }
 
 }

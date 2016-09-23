@@ -124,6 +124,20 @@ public class SceneReference : MonoBehaviour
         }
     }
 
+    public static FixedRotationManager FixedRotationManager
+    {
+        get
+        {
+            return _fixedRotationManager;
+
+        }
+        set
+        {
+            if (_fixedRotationManager == null)
+                _fixedRotationManager = value;
+        }
+    }
+
     private static PlayerSpawnManager _playerSpawnManager;
     private static MissileSpawnManager _missileSpawnManager;
     private static AsteroidSpawnManager _asteroidSpawnManager;
@@ -137,4 +151,5 @@ public class SceneReference : MonoBehaviour
     private static MeterManager _meterManager;
     private static ShieldManager _shieldManager;
     private static InputMappingManager _inputMappingManager;
+    private static FixedRotationManager _fixedRotationManager;
 }
