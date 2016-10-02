@@ -143,8 +143,8 @@ namespace TMPro.EditorUtilities
 
 
         // Enable Resetting of Material properties without losing unique properties of the font atlas.
-        //[MenuItem("CONTEXT/MaterialComponent/Reset", false, 2100)]
-        [MenuItem("CONTEXT/Material/Reset", false, 2100)]
+        //[MenuItem("CONTEXT/MaterialComponent/ResetWaveScore", false, 2100)]
+        [MenuItem("CONTEXT/Material/ResetWaveScore", false, 2100)]
         static void ResetSettings(MenuCommand command)
         {
 
@@ -158,7 +158,7 @@ namespace TMPro.EditorUtilities
 
 
             //Material mat = (Material)command.context;
-            Undo.RecordObject(mat, "Reset Material");
+            Undo.RecordObject(mat, "ResetWaveScore Material");
 
             Material tmp_mat = new Material(mat.shader);
 
@@ -175,7 +175,7 @@ namespace TMPro.EditorUtilities
 
                 mat.CopyPropertiesFromMaterial(tmp_mat);
 
-                // Reset ShaderKeywords
+                // ResetWaveScore ShaderKeywords
                 mat.shaderKeywords = new string[0]; // { "BEVEL_OFF", "GLOW_OFF", "UNDERLAY_OFF" };
             }
             else

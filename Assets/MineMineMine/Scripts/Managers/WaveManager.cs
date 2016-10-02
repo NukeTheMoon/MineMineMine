@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
     {
         ++_waveNo;
         SetDifficulty(_waveNo);
-        SceneReference.ScorekeepingManager.Reset();
+        SceneReference.ScorekeepingManager.ResetWaveScore();
         SceneReference.AsteroidSpawnManager.StartSpawning();
     }
 

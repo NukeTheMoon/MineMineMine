@@ -138,6 +138,48 @@ public class SceneReference : MonoBehaviour
         }
     }
 
+    public static UpgradeMenuManager UpgradeMenuManager
+    {
+        get
+        {
+            return _upgradeMenuManager;
+
+        }
+        set
+        {
+            if (_upgradeMenuManager == null)
+                _upgradeMenuManager = value;
+        }
+    }
+
+    public static PlayerMovementManager PlayerMovementManager
+    {
+        get
+        {
+            return _playerMovementManager;
+
+        }
+        set
+        {
+            if (_playerMovementManager == null)
+                _playerMovementManager = value;
+        }
+    }
+
+    public static UIManager UIManager
+    {
+        get
+        {
+            return _uiManager;
+
+        }
+        set
+        {
+            if (_uiManager == null)
+                _uiManager = value;
+        }
+    }
+
     private static PlayerSpawnManager _playerSpawnManager;
     private static MissileSpawnManager _missileSpawnManager;
     private static AsteroidSpawnManager _asteroidSpawnManager;
@@ -152,4 +194,7 @@ public class SceneReference : MonoBehaviour
     private static ShieldManager _shieldManager;
     private static InputMappingManager _inputMappingManager;
     private static FixedRotationManager _fixedRotationManager;
+    private static UpgradeMenuManager _upgradeMenuManager;
+    private static PlayerMovementManager _playerMovementManager;
+    private static UIManager _uiManager;
 }

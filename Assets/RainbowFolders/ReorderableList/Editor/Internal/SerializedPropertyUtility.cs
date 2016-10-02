@@ -13,7 +13,7 @@ namespace Borodar.ReorderableList.Internal {
 	public static class SerializedPropertyUtility {
 
 		/// <summary>
-		/// Reset the value of a property.
+		/// ResetWaveScore the value of a property.
 		/// </summary>
 		/// <param name="property">Serialized property for a serialized property.</param>
 		public static void ResetValue(SerializedProperty property) {

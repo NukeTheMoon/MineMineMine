@@ -26,11 +26,6 @@ namespace Assets.MineMineMine.Scripts.Managers
             SceneReference.MissileSpawnManager = this;
         }
 
-        private void Update()
-        {
-
-        }
-
         public void Shoot()
         {
             if (SceneReference.WeaponManager.CanFire())

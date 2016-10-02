@@ -278,7 +278,7 @@ namespace TMPro
 #if UNITY_EDITOR
         protected override void Reset()
         {
-            //Debug.Log("Reset() has been called.");
+            //Debug.Log("ResetWaveScore() has been called.");
 
             if (m_mesh != null)
                 DestroyImmediate(m_mesh);
@@ -1518,7 +1518,7 @@ namespace TMPro
                 if (m_isInputParsingRequired || m_isTextTruncated)
                     ParseInputText();
 
-                // Reset Font min / max used with Auto-sizing
+                // ResetWaveScore Font min / max used with Auto-sizing
                 if (m_enableAutoSizing)
                     m_fontSize = Mathf.Clamp(m_fontSize, m_fontSizeMin, m_fontSizeMax);
 

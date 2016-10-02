@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class ShieldManager : MonoBehaviour
 {
     public bool Invulnerability { get; private set; }
+    public float RadiusMultiplier = 1.0f;
     private List<GameObject> _protectionRings;
 
     public event EventHandler OnInvulnerabilityStart = delegate { };
@@ -72,6 +73,7 @@ public class ShieldManager : MonoBehaviour
                     Instantiate(PrefabReference.ProtectionRing,
                         player.transform.position, Quaternion.identity);
             protectionRing.transform.parent = player.transform;
+            protectionRing.transform.localScale = new Vector3(RadiusMultiplier, RadiusMultiplier, RadiusMultiplier);
             _protectionRings.Add(protectionRing);
         }
     }

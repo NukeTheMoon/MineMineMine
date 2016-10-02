@@ -223,7 +223,7 @@ namespace TeamUtility.IO.Examples
 			if (grounded)
 				currentMovementOffset -= pushDownOffset * Vector3.up;
 			
-			// Reset variables that will be set by collision function
+			// ResetWaveScore variables that will be set by collision function
 			movingPlatform.hitPlatform = null;
 			groundNormal = Vector3.zero;
 			

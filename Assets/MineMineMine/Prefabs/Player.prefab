@@ -1548,14 +1548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c19232bc365eb4ca8cdda070ce1568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  AngularSpeed: 0.35
-  BoostMultiplier: 2
-  DoubleTapTimeWindowMs: 100
-  BoostForce: 250
-  BoostParticleIntensification: 5
-  MaxTurnBankDeg: 70
-  BankDegsInSecond: 150
 --- !u!114 &11443190
 MonoBehaviour:
   m_ObjectHideFlags: 1

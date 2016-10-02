@@ -840,7 +840,7 @@ namespace Borodar.ReorderableList {
 				isMouseDragEvent = true;
 			}
 			if (isMouseDragEvent && _tracking) {
-				// Reset target index and adjust when looping through list items.
+				// ResetWaveScore target index and adjust when looping through list items.
 				if (mousePosition.y < firstItemY)
 					newTargetIndex = 0;
 				else if (mousePosition.y >= position.yMax)

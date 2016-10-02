@@ -9,16 +9,6 @@ using UnityEngine.UI;
 public class PlayerControls : MonoBehaviour
 {
 
-    public float Speed = 5.0f;
-    public float AngularSpeed = 0.35f;
-    public float BoostMultiplier = 2.0f;
-    public int DoubleTapTimeWindowMs = 100;
-    public int BoostForce = 250;
-    public int BoostParticleIntensification = 5;
-    [Range(0, 90)]
-    public float MaxTurnBankDeg = 70;
-    public float BankDegsInSecond = 150;
-
     private Text _debugText;
 
     private Rigidbody _rigidbody;
@@ -122,7 +112,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForThrustDoubleTap()
     {
-        if (!TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, DoubleTapTimeWindowMs))
+        if (!TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, SceneReference.PlayerMovementManager.DoubleTapTimeWindowMs))
         {
             _firstThrustTapped = false;
             _thrustReleased = false;
@@ -167,7 +157,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Boost()
     {
-        _rigidbody.AddForce(transform.forward * BoostForce);
+        _rigidbody.AddForce(transform.forward * SceneReference.PlayerMovementManager.BoostForce);
         SceneReference.MeterManager.ExpendMeter(MeterAction.Boost);
     }
 
@@ -185,7 +175,7 @@ public class PlayerControls : MonoBehaviour
         for (int i = 0; i < _particleSystems.Count; ++i)
         {
             if (_particleSystems[i] != null)
-                _particleSystems[i].startSize = _originalStartSizes[i] * BoostParticleIntensification;
+                _particleSystems[i].startSize = _originalStartSizes[i] * SceneReference.PlayerMovementManager.BoostParticleIntensification;
         }
         _particleDiminishIterator = 0;
     }
@@ -198,7 +188,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (_particleSystems[i] != null)
                 _particleSystems[i].startSize = Mathf.Lerp(
-                _originalStartSizes[i] * BoostParticleIntensification,
+                _originalStartSizes[i] * SceneReference.PlayerMovementManager.BoostParticleIntensification,
                 _originalStartSizes[i],
                 _particleDiminishIterator);
         }
@@ -214,14 +204,14 @@ public class PlayerControls : MonoBehaviour
     {
         float thrustForce = SceneReference.InputMappingManager.GetThrust() -
                             SceneReference.InputMappingManager.GetReverse();
-        _rigidbody.AddForce(transform.forward * thrustForce * Speed); // TODO: * fixedDeltaTime !
+        _rigidbody.AddForce(transform.forward * thrustForce * SceneReference.PlayerMovementManager.Speed); // TODO: * fixedDeltaTime !
     }
 
     private void Turn()
     {
         float turnForce = SceneReference.InputMappingManager.GetTurnRight() -
                           SceneReference.InputMappingManager.GetTurnLeft();
-        _rigidbody.AddTorque(Vector3.up * turnForce * AngularSpeed); // TODO: * fixedDeltaTime !
+        _rigidbody.AddTorque(Vector3.up * turnForce * SceneReference.PlayerMovementManager.AngularSpeed); // TODO: * fixedDeltaTime !
     }
 
     private void Bank()
@@ -240,17 +230,17 @@ public class PlayerControls : MonoBehaviour
 
     private void BankTowardMax(float liftImbalance)
     {
-        if (_meshChild.transform.rotation.eulerAngles.z < MaxTurnBankDeg * Math.Abs(liftImbalance) ||
-            _meshChild.transform.rotation.eulerAngles.z > 360 - MaxTurnBankDeg * Mathf.Abs(liftImbalance))
+        if (_meshChild.transform.rotation.eulerAngles.z < SceneReference.PlayerMovementManager.MaxTurnBankDeg * Math.Abs(liftImbalance) ||
+            _meshChild.transform.rotation.eulerAngles.z > 360 - SceneReference.PlayerMovementManager.MaxTurnBankDeg * Mathf.Abs(liftImbalance))
         {
-            _meshChild.transform.Rotate(Vector3.forward, -liftImbalance * BankDegsInSecond * Time.deltaTime);
+            _meshChild.transform.Rotate(Vector3.forward, -liftImbalance * SceneReference.PlayerMovementManager.BankDegsInSecond * Time.deltaTime);
         }
     }
 
     private void BankTowardLevel()
     {
         float zAngleBeforeRotation = _meshChild.transform.rotation.eulerAngles.z;
-        float rotationAngle = (_meshChild.transform.rotation.eulerAngles.z > 180 ? 1 : -1) * BankDegsInSecond *
+        float rotationAngle = (_meshChild.transform.rotation.eulerAngles.z > 180 ? 1 : -1) * SceneReference.PlayerMovementManager.BankDegsInSecond *
                                 Time.deltaTime;
         _meshChild.transform.Rotate(Vector3.forward, rotationAngle);
         float zAngleAfterRotation = _meshChild.transform.rotation.eulerAngles.z;

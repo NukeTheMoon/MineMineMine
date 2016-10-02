@@ -11,11 +11,11 @@ public class YieldAmountField : MonoBehaviour
     {
         _text = GetComponent<TextMeshProUGUI>();
         _text.text = SceneReference.ScorekeepingManager.TotalScore.ToString();
-        SceneReference.ScorekeepingManager.ScoreChanged += ScorekeepingManager_ScoreChanged;
+        SceneReference.ScorekeepingManager.OnScoreChanged += ScorekeepingManagerOnScoreChanged;
     }
 
-    private void ScorekeepingManager_ScoreChanged(object sender, System.EventArgs e)
+    private void ScorekeepingManagerOnScoreChanged(object sender, System.EventArgs e)
     {
-        _text.text = SceneReference.ScorekeepingManager.TotalScore.ToString("n0", CultureInfo.InvariantCulture);
+        _text.text = SceneReference.ScorekeepingManager.CurrentScore.ToString("n0", CultureInfo.InvariantCulture);
     }
 }

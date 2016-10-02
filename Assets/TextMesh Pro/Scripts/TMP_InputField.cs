@@ -702,7 +702,7 @@ namespace TMPro
                     return;
                 }
 
-                // Reset as we are already activated.
+                // ResetWaveScore as we are already activated.
                 m_ShouldActivateNextUpdate = false;
             }
 

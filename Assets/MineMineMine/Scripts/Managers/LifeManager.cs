@@ -44,7 +44,7 @@ namespace Assets.MineMineMine.Scripts.Managers
             }
             else
             {
-                SceneReference.RespawnManager.ShowReticle();
+                SceneReference.UIManager.DisplayUpgradeMenu();
             }
         }
 

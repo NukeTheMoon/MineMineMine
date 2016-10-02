@@ -209,7 +209,7 @@ namespace TMPro.Examples
                     {
                         if (hit.transform == CameraTarget)
                         {
-                            // Reset Follow Position
+                            // ResetWaveScore Follow Position
                             OrbitalAngle = 0;
                         }
                         else

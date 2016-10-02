@@ -768,7 +768,7 @@ namespace TMPro
         //                tr = textTransform.TransformPoint(new Vector3(tr.x, maxAscender, 0));
         //                br = textTransform.TransformPoint(new Vector3(br.x, minDescender, 0));
 
-        //                // Reset maxAscender and minDescender for next word segment.
+        //                // ResetWaveScore maxAscender and minDescender for next word segment.
         //                maxAscender = -Mathf.Infinity;
         //                minDescender = Mathf.Infinity;
 
