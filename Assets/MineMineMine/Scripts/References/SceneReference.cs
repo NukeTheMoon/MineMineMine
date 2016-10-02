@@ -180,6 +180,20 @@ public class SceneReference : MonoBehaviour
         }
     }
 
+    public static SelectedButtonManager SelectedButtonManager
+    {
+        get
+        {
+            return _selectedButtonManager;
+
+        }
+        set
+        {
+            if (_selectedButtonManager == null) _selectedButtonManager = value;
+
+        }
+    }
+
     private static PlayerSpawnManager _playerSpawnManager;
     private static MissileSpawnManager _missileSpawnManager;
     private static AsteroidSpawnManager _asteroidSpawnManager;
@@ -197,4 +211,5 @@ public class SceneReference : MonoBehaviour
     private static UpgradeMenuManager _upgradeMenuManager;
     private static PlayerMovementManager _playerMovementManager;
     private static UIManager _uiManager;
+    private static SelectedButtonManager _selectedButtonManager;
 }

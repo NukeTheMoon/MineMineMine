@@ -60,12 +60,6 @@ public class PlayerControls : MonoBehaviour
             DiminishParticles();
         }
         Bank();
-        //_debugText.text =
-        //    "Right trigger = " + InputManager.GetAxis("Right Trigger") +
-        //    "\n_firstThrustTapped = " + _firstThrustTapped +
-        //    "\n_thrustReleased = " + _thrustReleased +
-        //    "\n_boosted = " + _boosted +
-        //    "\nTimeWindow = " + TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, DoubleTapTimeWindowMs);
     }
 
     private bool ParticlesAtOriginalIntensity()

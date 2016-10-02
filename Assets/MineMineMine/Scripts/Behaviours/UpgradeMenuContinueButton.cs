@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine.EventSystems;
 
-public class UpgradeMenuContinueButton : MonoBehaviour, IPointerUpHandler
+public class UpgradeMenuContinueButton : MonoBehaviour
 {
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnContinueButtonPressed()
     {
         SceneReference.UIManager.HideUpgradeMenu();
         SceneReference.RespawnManager.ShowReticle();

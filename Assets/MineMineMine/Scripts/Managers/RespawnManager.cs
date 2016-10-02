@@ -55,6 +55,20 @@ namespace Assets.MineMineMine.Scripts.Managers
         {
             if (_reticle == null)
             {
+                if (SceneReference.LifeManager.LivesLeft > 1)
+                {
+                    SceneReference.UIManager.DisplayMessage(SceneReference.LifeManager.LivesLeft +
+                                                            " EMERGENCY TELEPORTS LEFT");
+                }
+                else if (SceneReference.LifeManager.LivesLeft == 1)
+                {
+                    SceneReference.UIManager.DisplayMessage(SceneReference.LifeManager.LivesLeft +
+                                                            " EMERGENCY TELEPORT LEFT");
+                }
+                else if (SceneReference.LifeManager.LivesLeft == 0)
+                {
+                    SceneReference.UIManager.DisplayMessage("NO EMERGENCY TELEPORTS LEFT. GOOD LUCK!");
+                }
                 Respawning = true;
                 _reticle =
                     (GameObject)

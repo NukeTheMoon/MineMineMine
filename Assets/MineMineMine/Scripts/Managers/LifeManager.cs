@@ -6,22 +6,21 @@ namespace Assets.MineMineMine.Scripts.Managers
     public class LifeManager : MonoBehaviour
     {
 
-        public int StartingLives = 3;
+        public int StartingLives = 2;
 
         public bool PlayerAlive { get; set; }
 
-        private int _livesLeft;
+        public int LivesLeft { get; private set; }
 
         private void Awake()
         {
             RegisterWithSceneReference();
-
         }
 
         private void Start()
         {
             PlayerAlive = true;
-            _livesLeft = StartingLives;
+            LivesLeft = StartingLives;
         }
 
         private void RegisterWithSceneReference()
@@ -32,7 +31,7 @@ namespace Assets.MineMineMine.Scripts.Managers
 
         public bool NoLivesLeft()
         {
-            return _livesLeft <= 0;
+            return LivesLeft < 0;
         }
 
         public void Die()
@@ -41,6 +40,7 @@ namespace Assets.MineMineMine.Scripts.Managers
             if (NoLivesLeft())
             {
                 PlayerAlive = false;
+                SceneReference.UIManager.DisplayGameOverMenu();
             }
             else
             {
@@ -57,7 +57,7 @@ namespace Assets.MineMineMine.Scripts.Managers
 
         public void DecreaseLifeCount()
         {
-            --_livesLeft;
+            --LivesLeft;
         }
     }
 }

@@ -9,8 +9,8 @@ public class UpgradeMenuManager : MonoBehaviour
     public int SecondLevelWeaponCost = 300000;
     public int FirstLevelSecondaryCost = 50000;
     public int SecondLevelSecondaryCost = 100000;
-    public int FirstLevelPulseCooldownDecreaseMs = 25;
-    public int SecondLevelPulseCooldownDecreaseMs = 35;
+    public int FirstLevelPulseCooldownDecreaseMs = 20;
+    public int SecondLevelPulseCooldownDecreaseMs = 30;
     public int FirstLevelPulseMeterDecrease = 2;
     public int SecondLevelPulseMeterDecrease = 3;
     public int FirstLevelScattershotForceIncrease = 750;

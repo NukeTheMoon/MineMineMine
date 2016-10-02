@@ -7,13 +7,21 @@ public class UIAnimatorReference : MonoBehaviour
     private Animator _menuCoverAnimator;
     [SerializeField]
     private Animator _upgradeMenuAnimator;
+    [SerializeField]
+    private Animator _gameOverMenuAnimator;
+    [SerializeField]
+    private Animator _messageAnimator;
 
     public static Animator MenuCoverAnimator;
     public static Animator UpgradeMenuAnimator;
+    public static Animator GameOverMenuAnimator;
+    public static Animator MessageAnimator;
 
     private void Start()
     {
         MenuCoverAnimator = _menuCoverAnimator;
         UpgradeMenuAnimator = _upgradeMenuAnimator;
+        GameOverMenuAnimator = _gameOverMenuAnimator;
+        MessageAnimator = _messageAnimator;
     }
 }

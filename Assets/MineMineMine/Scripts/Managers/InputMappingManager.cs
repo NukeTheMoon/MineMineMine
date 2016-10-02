@@ -199,6 +199,6 @@ public class InputMappingManager : MonoBehaviour
     {
         return (CurrentScheme == InputScheme.Keyboard)
             ? InputManager.GetKey(KeyCode.Space)
-            : InputManager.GetButton("Button A") || InputManager.GetButton("Right Bumper");
+            : InputManager.GetButton("Right Bumper");
     }
 }
