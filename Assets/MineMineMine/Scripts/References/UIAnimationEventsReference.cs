@@ -13,7 +13,7 @@ public class UIAnimationEventsReference : MonoBehaviour
     public static UpgradeMenuAnimationEvents UpgradeMenuAnimationEvents;
     public static MessageAnimationEvents MessageAnimationEvents;
 
-    private void Start()
+    private void Awake()
     {
         MenuCoverAnimationEvents = _menuCoverAnimationEvents;
         UpgradeMenuAnimationEvents = _upgradeMenuAnimationEvents;

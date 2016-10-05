@@ -17,7 +17,7 @@ public class UIAnimatorReference : MonoBehaviour
     public static Animator GameOverMenuAnimator;
     public static Animator MessageAnimator;
 
-    private void Start()
+    private void Awake()
     {
         MenuCoverAnimator = _menuCoverAnimator;
         UpgradeMenuAnimator = _upgradeMenuAnimator;

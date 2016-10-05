@@ -15,7 +15,7 @@ public class UIGroupReference : MonoBehaviour
     public static GameObject GameOverMenu;
     public static GameObject Message;
 
-    private void Start()
+    private void Awake()
     {
         UpgradeMenu = _upgradeMenu;
         GameOverMenu = _gameOverMenu;
