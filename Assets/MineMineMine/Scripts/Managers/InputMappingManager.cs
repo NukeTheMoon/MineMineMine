@@ -56,6 +56,10 @@ public class InputMappingManager : MonoBehaviour
     {
         CheckForControllerChange();
         DebugText.text = InputManager.GetAxis("Right Trigger").ToString("0.000");
+        if (InputManager.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void CheckForControllerChange()
