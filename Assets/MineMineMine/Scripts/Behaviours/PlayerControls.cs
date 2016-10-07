@@ -106,7 +106,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool CheckForThrustDoubleTap()
     {
-        if (!TimeHelper.WithinDoubleTapTimeWindow(_firstThrustTapTimeMs, SceneReference.PlayerMovementManager.DoubleTapTimeWindowMs))
+        if (!TimeHelper.WithinTimeWindow(_firstThrustTapTimeMs, SceneReference.PlayerMovementManager.DoubleTapTimeWindowMs))
         {
             _firstThrustTapped = false;
             _thrustReleased = false;

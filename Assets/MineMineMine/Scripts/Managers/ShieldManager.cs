@@ -7,7 +7,7 @@ public class ShieldManager : MonoBehaviour
 {
     public bool Invulnerability { get; private set; }
     public float RadiusMultiplier = 1.0f;
-    private List<GameObject> _protectionRings;
+    private List<GameObject> _shields;
 
     public event EventHandler OnInvulnerabilityStart = delegate { };
     public event EventHandler OnInvulnerabilityEnd = delegate { };
@@ -19,7 +19,7 @@ public class ShieldManager : MonoBehaviour
 
     private void Start()
     {
-        _protectionRings = new List<GameObject>();
+        _shields = new List<GameObject>();
 
     }
 
@@ -74,7 +74,7 @@ public class ShieldManager : MonoBehaviour
                         player.transform.position, Quaternion.identity);
             protectionRing.transform.parent = player.transform;
             protectionRing.transform.localScale = new Vector3(RadiusMultiplier, RadiusMultiplier, RadiusMultiplier);
-            _protectionRings.Add(protectionRing);
+            _shields.Add(protectionRing);
         }
     }
 
@@ -87,11 +87,11 @@ public class ShieldManager : MonoBehaviour
 
     private void DestroyProtectionRings()
     {
-        for (var i = 0; i < _protectionRings.Count; ++i)
+        for (var i = 0; i < _shields.Count; ++i)
         {
-            Destroy(_protectionRings[i]);
+            Destroy(_shields[i]);
         }
-        _protectionRings = new List<GameObject>();
+        _shields = new List<GameObject>();
     }
 
 }
